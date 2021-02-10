@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Yekan;
+}
+@font-face {
+  font-family: Yekan;
+  src: url(./font/Yekan\ Bakh\ EN\ 05\ Medium.ttf);
+}
+.App {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    135deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(11, 48, 83, 1) 0%,
+    rgba(20, 64, 75, 1) 15%,
+    rgba(23, 70, 88, 1) 30%,
+    rgba(24, 81, 102, 1) 45%,
+    rgba(42, 88, 121, 1) 60%,
+    rgba(43, 78, 116, 1) 75%,
+    rgba(50, 89, 135, 1) 90%,
+    rgba(38, 73, 111, 1) 100%
+  );
+}
+.cloud{
+  position: absolute;
+  font-size: 100px;
+  color: white;
+  position: absolute;
+  left: 36%;
+  top: 1%;
+}
+.water-one,.water-two,.water-three,.water-four,.water-five,.water-six{
+  position: absolute;
+  color: rgb(74, 148, 177);
+  font-size: 22px;
+  animation-name: waterDown;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.water-one{
+  left:37%;
+  animation-duration: 5s;
+}
+.water-two{
+  left: 38%;
+  animation-duration: 8s;
+}
+.water-three{
+  left: 39%;
+  animation-duration: 4s;
+}
+.water-four{
+  left: 40%;
+  animation-duration: 8s;
+}
+.water-five{
+  left: 41%;
+  animation-duration: 6s;
+}
+.water-six{
+  left: 42%;
+  animation-duration: 5s;
+}
+
+@keyframes waterDown{
+  0%{top: 14%;}
+  100%{top: 95%;}
+}
+.navbar {
+  height: 70px;
+  padding-bottom: 0px !important;
+  display: flex;
+}
+.navbar-nav {
+  margin-right: auto;
+}
+.nav-item {
+  margin-right: 50px;
+  height: 100% !important;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer !important;
+  font-weight: 600;
+}
+.nav-item::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width .3s;
+}
+.nav-item:hover::after {
+  width: 100%;
+}
+main {
+  width: 100%;
+}
+.search-form{
+  width: 50%;
+  position: relative;
+  justify-content: center;
+}
+.search-box {
+  width: 90% !important;
+  height: 50px !important;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border: none;
+  margin-right: 50px;
+  box-shadow: 1px 2px 10px rgba(255, 255, 255, 0.5);
+}
+.search-btn{
+  position:absolute;
+  right: 80px;
+  top: 10px;
+  background: none;
+  border: none;
+}
+.search-btn i{
+  font-size: 24px;
+  color: rgb(10, 85, 146);
+}
