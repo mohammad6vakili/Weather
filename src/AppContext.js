@@ -9,6 +9,7 @@ export const AppProvider=(props)=>{
     const [query,setQuery]=useState('');
     const [city,setCity]=useState([]);
     const [queryActive,setQueryActive]=useState(false);
+    const [menuOpen,setMenuOpen]=useState(false);
 
 
 
@@ -28,12 +29,23 @@ export const AppProvider=(props)=>{
         setQuery(e.target.value);
     }
 
+    const openMenu=()=>{
+        setMenuOpen(true)
+    }
+
+    const closeMenu=()=>{
+        setMenuOpen(false)
+    }
+
     const value={
         getData,
         query,
         getQuery,
         city,
         queryActive,
+        openMenu,
+        closeMenu,
+        menuOpen
     }
 
     return (

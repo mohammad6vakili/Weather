@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.css';
-import Nav from './components/Nav.jsx';
 import Main from './components/Main.jsx'
 import {AppProvider} from './AppContext'; 
 
@@ -13,7 +12,6 @@ const App=()=> {
 
     <AppProvider>
     <div className='App'>
-        <Nav/>
         <Main/>
     </div>
     </AppProvider>
