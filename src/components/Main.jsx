@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {AppContext} from '../AppContext';
+import City from './City.jsx';
+
 
 
 const Main=()=>{
-
-
-    const contentStyle = {
-        height: '160px',
-        color: '#fff',
-        lineHeight: '160px',
-        textAlign: 'center',
-        background: '#364d79',
-      };
+    const{
+        queryActive
+    }=useContext(AppContext)
 
     return(
-        <main>
-            
-
+        <main className='main-wrapper'>
+           
+            <div className='weather-wrapper'>
+                {queryActive && <City/>}
+            </div>
 
         </main>
     )

@@ -8,7 +8,8 @@ const Nav=()=>{
     const {
         getData,
         query,
-        getQuery
+        getQuery,
+        city
     }=useContext(AppContext)
 
     return(
@@ -30,7 +31,7 @@ const Nav=()=>{
 
             <form className='search-form' onSubmit={getData}>
                 <input className='search-box form-control' value={query} onChange={getQuery} type="text" placeholder='All Cities around the World'/>
-                <button className='search-btn'><i className="fa fa-search"/></button>
+                <button type='submit' className='search-btn'><i className="fa fa-search"/></button>
             </form>
         </nav>
     )

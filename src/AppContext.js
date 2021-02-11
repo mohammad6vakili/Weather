@@ -1,11 +1,14 @@
 import React,{useState , createContext} from 'react';
 
+
 export const AppContext = createContext();
+
 
 export const AppProvider=(props)=>{
 
     const [query,setQuery]=useState('');
     const [city,setCity]=useState([]);
+    const [queryActive,setQueryActive]=useState(false);
 
 
 
@@ -15,14 +18,10 @@ export const AppProvider=(props)=>{
           `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`
         );
         const data = await response.json();
+        console.log(data)
         setCity(data);
-        console.log(city);
-      };
-    
-
-    // useEffect(() => {
-    //     getData();
-    //   }, []);
+        setQueryActive(true);
+    };
     
 
     const getQuery=(e)=>{
@@ -32,7 +31,9 @@ export const AppProvider=(props)=>{
     const value={
         getData,
         query,
-        getQuery
+        getQuery,
+        city,
+        queryActive,
     }
 
     return (
