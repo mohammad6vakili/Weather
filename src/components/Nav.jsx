@@ -44,7 +44,7 @@ const Nav=()=>{
                 <i onClick={openMenu} style={{fontSize:50+'px',paddingTop:10+'px'}} className="fa fa-bars"></i>
             </div>
 
-            <form className='search-form ml-5' onSubmit={getData}>
+            <form className='search-form' onSubmit={getData}>
                 <input className='search-box form-control' value={query} onChange={getQuery} type="text" placeholder='All Cities around the World'/>
                 <button type='submit' className='search-btn'><i className="fa fa-search"/></button>
             </form>
