@@ -1,17 +1,18 @@
 import React,{useContext} from 'react';
 import {AppContext} from '../AppContext';
+import {v4 as uuidv4} from 'uuid';
 
 const Watchlist=()=>{
 
     const{
-showWatchList
+        showWatchList
     }=useContext(AppContext)
 
     return(
         <div className='watchlist-wrapper'>
 
             {showWatchList.map((city)=>(
-                        <div className='city-box'>
+                        <div key={uuidv4()} className='watch-city-box'>
                         <div className="city-info">
                             <div className='d-flex'>
                                 <div className='d-flex flex-column w-50 text-center'>

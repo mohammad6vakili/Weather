@@ -39,20 +39,22 @@ const Nav=()=>{
                     <button onClick={closeMenu} className='menu-close-button'><i className="fa fa-chevron-left"></i></button>
                 </ul>
             </Fade>
-
+            <Fade left>
             <div className={menuOpen ? "invisible" : "visible"} id='menu-button'>
                 <i onClick={openMenu} style={{fontSize:50+'px',paddingTop:10+'px'}} className="fa fa-bars"></i>
             </div>
-
+            </Fade>
+            <Fade top>
             <form className='search-form' onSubmit={getData}>
                 <input className='search-box form-control' value={query} onChange={getQuery} type="text" placeholder='All Cities around the World'/>
                 <button type='submit' className='search-btn'><i className="fa fa-search"/></button>
             </form>
-
+            </Fade>
+            <Fade right>
             <div className='register'>
                 <span className='mr-2'>SignUp</span><i className="fa fa-user"></i>
             </div>
-        
+            </Fade>
         </div>
     )
 }

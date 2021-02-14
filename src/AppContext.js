@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { message } from "antd";
 
 export const AppContext = createContext();
@@ -8,8 +8,12 @@ export const AppProvider = (props) => {
   const [city, setCity] = useState([]);
   const [queryActive, setQueryActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [watchlist, setWatchlist] = useState([]);
+  const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')));
   const [showWatchList, setShowWatchList] = useState([]);
+
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('watchlist')));
+  }, [])
 
   const getData = async (e) => {
     e.preventDefault();
@@ -38,6 +42,7 @@ export const AppProvider = (props) => {
     message.success("Added to Watchlist");
     const showWatchListinside = [];
     watchlist.push(query);
+    localStorage.setItem('watchlist',JSON.stringify(watchlist));
     console.log(watchlist);
     watchlist.map((cityName)=>(
        fetch(
