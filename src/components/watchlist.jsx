@@ -5,14 +5,15 @@ import {v4 as uuidv4} from 'uuid';
 const Watchlist=()=>{
 
     const{
-        showWatchList
+        showWatchList,
+        removeFromWatch
     }=useContext(AppContext)
 
     return(
         <div className='watchlist-wrapper'>
 
-            {showWatchList.map((city)=>(
-                        <div key={uuidv4()} className='watch-city-box'>
+            {showWatchList===[] ? alert('Watchlist is empty') : showWatchList.map((city)=>(
+                        <div key={uuidv4()} className='watch-city-box mb-3'>
                         <div className="city-info">
                             <div className='d-flex'>
                                 <div className='d-flex flex-column w-50 text-center'>
@@ -27,9 +28,9 @@ const Watchlist=()=>{
                                     <small key={weather.id}>{weather.main}</small>
                                     ))}                        
                                 </div>
-                                
                             </div>
                             <small className='mb-3'>{Date()}</small>
+                            <button onClick={()=>removeFromWatch(city)} className='btn btn-outline-danger btn-sm'>Remove from Watchlist</button>
                         </div>
                         <div className="city-weather">
                             <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>

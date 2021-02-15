@@ -6,7 +6,7 @@ const City=()=>{
     
     const{
         city,
-        confirm,
+        addToWatch,
         cancel
     }=useContext(AppContext)
     
@@ -31,7 +31,7 @@ const City=()=>{
                 <small className='mb-3'>{Date()}</small>
                 <Popconfirm
                     title="Do you want to add to the Watchlist?"
-                    onConfirm={confirm}
+                    onConfirm={addToWatch}
                     onCancel={cancel}
                     okText="Yes"
                     cancelText="No"

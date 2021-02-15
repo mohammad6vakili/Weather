@@ -11,7 +11,9 @@
 .App {
   width: 100%;
   display: flex;
+  flex-direction: column;
   position: relative;
+  overflow-y: auto;
   height: 100vh;
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -68,14 +70,12 @@
   width: 0;
   height: 2px;
   background: white;
-  transition: width 0.7s;
+  transition: width 0.3s;
 }
 .menu-item:hover::after {
-  width: 97%;
-}
-.main-wrapper {
   width: 100%;
 }
+
 .search-form {
   width: 50%;
   position: relative;
@@ -315,7 +315,7 @@
   min-width: 300px;
   background-color: white;
   border: none;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: 8px ;
   box-shadow: 1px 2px 10px rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: space-between;

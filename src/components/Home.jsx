@@ -1,11 +1,19 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Fade from 'react-reveal';
 import Zoom from 'react-reveal';
-
+import City from './City';
+import {AppContext} from '../AppContext';
 const Home=()=>{
 
+const {
+    queryActive
+}=useContext(AppContext)
+
     return(
-       
+        <div className='weather-wrapper mb-5'>
+        {queryActive ?
+        <City/>
+        :
         <div className="home-wrapper">
             
             <Zoom>
@@ -31,6 +39,8 @@ const Home=()=>{
             </div>
               </Fade>
         </div>
+        }
+</div>
       
     )
 }

@@ -1,6 +1,8 @@
 import React,{useContext} from 'react';
 import {AppContext} from '../AppContext';
 import Fade from 'react-reveal';
+import { BrowserRouter as Router } from "react-router-dom";
+import {Link} from 'react-router-dom';
 
 
 const Nav=()=>{
@@ -17,28 +19,45 @@ const Nav=()=>{
 
     return(
 
+<Router>
         <div className='navigation'>
-
             <Fade left>
                 <ul className={menuOpen ? "menu-open" : "menu-closed"}>
-                    <li className="menu-item">
+                    
+                    <Link to='/'> 
+                      <li className="menu-item">
                         Home
-                    </li>
-                    <li className="menu-item">
-                        WatchList
-                    </li>
-                    <li className="menu-item">
-                        Git
-                    </li>
-                    <li className="menu-item">
-                        SignUp
-                    </li>
-                    <li className="menu-item">
-                        Login   
-                    </li>
+                      </li>
+                    </Link>  
+                    
+                    <Link to='/watchlist'>
+                        <li className="menu-item">
+                            WatchList
+                        </li>
+                    </Link>
+
+                    <a className='text-white' href="https://github.com/mohammad6vakili/Weather">
+                        <li className="menu-item">
+                            Git
+                        </li>
+                    </a> 
+                    
+                    <Link to='signup'>
+                        <li className="menu-item">
+                            SignUp
+                        </li>
+                    </Link>
+
+                    <Link to='login'>
+                        <li className="menu-item">
+                            Login   
+                        </li>
+                    </Link>
+
                     <button onClick={closeMenu} className='menu-close-button'><i className="fa fa-chevron-left"></i></button>
                 </ul>
             </Fade>
+
             <Fade left>
             <div className={menuOpen ? "invisible" : "visible"} id='menu-button'>
                 <i onClick={openMenu} style={{fontSize:50+'px',paddingTop:10+'px'}} className="fa fa-bars"></i>
@@ -55,7 +74,9 @@ const Nav=()=>{
                 <span className='mr-2'>SignUp</span><i className="fa fa-user"></i>
             </div>
             </Fade>
-        </div>
+       </div>
+</Router>
+        
     )
 }
 export default Nav;
