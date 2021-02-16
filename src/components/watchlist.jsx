@@ -1,18 +1,21 @@
 import React,{useContext} from 'react';
 import {AppContext} from '../AppContext';
 import {v4 as uuidv4} from 'uuid';
+import {Popconfirm} from 'antd';
 
 const Watchlist=()=>{
 
+
     const{
         showWatchList,
-        removeFromWatch
+        removeFromWatch,
+        cancel
     }=useContext(AppContext)
 
     return(
         <div className='watchlist-wrapper'>
 
-            {showWatchList===[] ? alert('Watchlist is empty') : showWatchList.map((city)=>(
+            {showWatchList.map((city)=>(
                         <div key={uuidv4()} className='watch-city-box mb-3'>
                         <div className="city-info">
                             <div className='d-flex'>
@@ -30,7 +33,19 @@ const Watchlist=()=>{
                                 </div>
                             </div>
                             <small className='mb-3'>{Date()}</small>
-                            <button onClick={()=>removeFromWatch(city)} className='btn btn-outline-danger btn-sm'>Remove from Watchlist</button>
+                            <Popconfirm
+                                title="Do you want to delete from Watchlist?"
+                                onConfirm={()=>removeFromWatch(city)}
+                                onCancel={cancel}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <button className='btn btn-outline-danger btn-sm'>Remove from Watchlist</button>
+                            </Popconfirm>
+                            
+                            
+                            
+                           
                         </div>
                         <div className="city-weather">
                             <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>

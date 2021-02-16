@@ -12,8 +12,14 @@ export const AppProvider = (props) => {
   const [queryActive, setQueryActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')));
+  const [watchListUnique , setWatchListUnique]=useState([]);
   const [showWatchList, setShowWatchList] = useState([]);
 
+
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem('watchlist')));
+    console.log(showWatchList);
+  }, [])
   
 
 // ------------------------------------------------get city data--------------------------------------
@@ -53,22 +59,24 @@ export const AppProvider = (props) => {
 
 
 //-------------------------------------------add city to Watchlist-----------------------------------
-  const addToWatch = async () => {
+  const addToWatch = (city) => {
     message.success("Added to Watchlist");
     const showWatchListinside = [];
-    // watchlist.push(query);
-    watchlist.push({name:query , id:city.id})
-    localStorage.setItem('watchlist',JSON.stringify(watchlist));
-    console.log(watchlist);
-    watchlist.map((cityName)=>(
+    watchlist.push({name:query , id:city.id});
+    setWatchListUnique(Array.from(new Set(watchlist.map(a => a.id)))
+    .map(id => {
+    return watchlist.find(a => a.id === id)}));
+    localStorage.setItem('watchlist',JSON.stringify(watchListUnique));
+    console.log(watchListUnique);
+    watchListUnique.map((cityName)=>(
        fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`
       )
       .then(response=>response.json())
       .then(data=>showWatchListinside.push(data))
       ));
-      setShowWatchList(showWatchListinside);
-      console.log(showWatchList);
+    setShowWatchList(showWatchListinside);
+    console.log(showWatchList);
   };
 
 
@@ -76,14 +84,15 @@ export const AppProvider = (props) => {
 //-------------------------------------------remove city from Watchlist-------------------------------
   const removeFromWatch=(city)=>{
     const filterWatch = showWatchList;
-    const filterWatchName=watchlist;
+    const filterWatchName=watchListUnique;
     setShowWatchList(
     filterWatch.filter((item)=>(item.id!==city.id))
     )
-    setWatchlist(
+    setWatchListUnique(
     filterWatchName.filter((item)=>(item.id!==city.id))
     )
     localStorage.setItem('watchlist',JSON.stringify(filterWatchName.filter((item)=>(item.id!==city.id))));
+    console.log(watchListUnique);
   }
 
 

@@ -31,7 +31,7 @@ const City=()=>{
                 <small className='mb-3'>{Date()}</small>
                 <Popconfirm
                     title="Do you want to add to the Watchlist?"
-                    onConfirm={addToWatch}
+                    onConfirm={()=>addToWatch(city)}
                     onCancel={cancel}
                     okText="Yes"
                     cancelText="No"
