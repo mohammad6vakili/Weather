@@ -12,14 +12,12 @@ export const AppProvider = (props) => {
   const [queryActive, setQueryActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')));
-  const [watchListUnique , setWatchListUnique]=useState([]);
+  const [watchListUnique , setWatchListUnique]=useState(JSON.parse(localStorage.getItem('watchlist')));
   const [showWatchList, setShowWatchList] = useState([]);
 
+//----------------------------------------------Component Did Mount--------------------------------
 
-  useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem('watchlist')));
-    console.log(showWatchList);
-  }, [])
+
   
 
 // ------------------------------------------------get city data--------------------------------------
@@ -39,14 +37,12 @@ export const AppProvider = (props) => {
   };
 
 
-
 // -----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);
   };
 
   
-
 //----------------------------------------------close and open menu-----------------------------------
   const openMenu = () => {
     setMenuOpen(true);
@@ -57,28 +53,31 @@ export const AppProvider = (props) => {
   };
 
 
-
 //-------------------------------------------add city to Watchlist-----------------------------------
   const addToWatch = (city) => {
     message.success("Added to Watchlist");
-    const showWatchListinside = [];
-    watchlist.push({name:query , id:city.id});
+    watchlist.push({name:city.name , id:city.id});
     setWatchListUnique(Array.from(new Set(watchlist.map(a => a.id)))
     .map(id => {
     return watchlist.find(a => a.id === id)}));
     localStorage.setItem('watchlist',JSON.stringify(watchListUnique));
     console.log(watchListUnique);
-    watchListUnique.map((cityName)=>(
-       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`
-      )
-      .then(response=>response.json())
-      .then(data=>showWatchListinside.push(data))
-      ));
-    setShowWatchList(showWatchListinside);
-    console.log(showWatchList);
   };
 
+
+// ------------------------------------------------load watchlist-------------------------------------
+  const loadWatchList=()=>{
+      const showWatchListinside = [];
+      watchListUnique.map((cityName)=>(
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`
+        )
+        .then(response=>response.json())
+        .then(data=>showWatchListinside.push(data))
+        ));
+      setShowWatchList(showWatchListinside);
+      console.log(showWatchList);
+  }
 
 
 //-------------------------------------------remove city from Watchlist-------------------------------
@@ -96,12 +95,10 @@ export const AppProvider = (props) => {
   }
 
 
-
 //-------------------------------------------cancel pop confirm---------------------------------------
   const cancel = () => {
     message.error("Not Added");
   };
-
 
 
 //--------------------------------------------Pass to Provider----------------------------------------
@@ -118,7 +115,9 @@ export const AppProvider = (props) => {
     cancel,
     watchlist,
     showWatchList,
-    removeFromWatch
+    removeFromWatch,
+    watchListUnique,
+    loadWatchList
   };
 
 

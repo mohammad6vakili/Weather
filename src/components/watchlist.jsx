@@ -1,7 +1,9 @@
-import React,{useContext} from 'react';
+import React,{useContext , useEffect} from 'react';
 import {AppContext} from '../AppContext';
 import {v4 as uuidv4} from 'uuid';
 import {Popconfirm} from 'antd';
+
+
 
 const Watchlist=()=>{
 
@@ -9,11 +11,14 @@ const Watchlist=()=>{
     const{
         showWatchList,
         removeFromWatch,
-        cancel
+        cancel,
     }=useContext(AppContext)
 
     return(
         <div className='watchlist-wrapper'>
+
+            
+
 
             {showWatchList.map((city)=>(
                         <div key={uuidv4()} className='watch-city-box mb-3'>

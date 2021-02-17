@@ -15,7 +15,6 @@ const {
         <City/>
         :
         <div className="home-wrapper">
-            
             <Zoom>
             <div className='home-anim'> 
                 <i id='home-cloud' className="fa fa-cloud"></i>

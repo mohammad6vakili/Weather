@@ -41,7 +41,7 @@ const City=()=>{
             </div>
             <div className="city-weather">
                 <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>
-                <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.humidity)}</span></div>
+                <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.humidity)}{" "} %</span></div>
                 <div className='min-max-temp border-bottom border-secondary'>
                     <div className='max-temp justify-content-around'>
                         <span style={{fontSize:30+'px'}} className='m-0 d-flex align-items-end justify-content-center'><span className='h-75'>{Math.floor(city.main.temp_max - 273.15)+'°'}</span><strong style={{fontSize:18+'px'}}>C</strong></span>

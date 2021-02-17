@@ -1,23 +1,18 @@
 import React from 'react';
 import './index.css';
-import Main from './components/Main.jsx'
-import Nav from './components/Nav';
 import {AppProvider} from './AppContext'; 
-
+import Main from './components/Main';
 
 const App=()=> {
 
-
-
-
+  
   return (
 
 
           <AppProvider>
-            <div className='App'>
-                <Nav/>
+              <div className='App'>
                 <Main/>
-            </div>
+              </div>
           </AppProvider>
 
 

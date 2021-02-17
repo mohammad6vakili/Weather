@@ -321,3 +321,19 @@
   justify-content: space-between;
   padding: 20px 10px 30px 10px;
 }
+/* ---------------------------------------------------------------------------------------------------- */
+.show-watch-btn{
+  width: 300px;
+  height: 200px;
+  color: white;
+  font-size: 30px;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(30, 255, 0, 0.267);
+  border-radius: 8px;
+}
+.show-watch-btn:hover{
+  background-color: rgba(53, 240, 28, 0.644);
+}

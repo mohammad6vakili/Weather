@@ -14,7 +14,7 @@ const Nav=()=>{
         getQuery,
         openMenu,
         closeMenu,
-        menuOpen
+        menuOpen,
     }=useContext(AppContext)
 
     return(
@@ -24,7 +24,7 @@ const Nav=()=>{
             <Fade left>
                 <ul className={menuOpen ? "menu-open" : "menu-closed"}>
                     
-                    <Link to='/'> 
+                    <Link to="/"> 
                       <li className="menu-item">
                         Home
                       </li>
