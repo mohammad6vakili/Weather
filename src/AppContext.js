@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { message } from "antd";
+import axios from "axios";
 
 export const AppContext = createContext();
 
@@ -8,6 +9,7 @@ export const AppProvider = (props) => {
 
 // ---------------------------------------------------States---------------------------------------
   const [query, setQuery] = useState("");
+  const [coordinates , setCoordinates]=useState([]);
   const [city, setCity] = useState([]);
   const [queryActive, setQueryActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,32 +19,41 @@ export const AppProvider = (props) => {
 
 //----------------------------------------------Component Did Mount--------------------------------
 
+// useEffect(()=>{
 
+// },[])
   
 
 // ------------------------------------------------get city data--------------------------------------
   const getData = async (e) => {
     e.preventDefault();
+
+    //       const response = await fetch(
+    //   `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`
+    // );
+    // const data = await response.json();
     if(query===""){
       alert('Enter a city name!')
     }else{
-          const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`
-    );
-    const data = await response.json();
-    console.log(data);
-    setCity(data);
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lng}&appid=498e14c3edcd5cadea0be9209c066677`)
+    .then(res=>setCity(res.data))
     setQueryActive(true);
-    }
-  };
+    console.log(city);
+  }}
 
 
 // -----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);
+    console.log(e.target.value);
+    axios.get(`http://www.mapquestapi.com/geocoding/v1/address?key=UBzeDsLTvRf7ecUw1qy5tN5EMPXITqRc&location=${e.target.value}`)
+    .then(response=>response.data.results[0].locations.map((item)=>{
+      if(item.adminArea5!==""){
+        setCoordinates({lat:JSON.stringify(item.latLng.lat) , lng:JSON.stringify(item.latLng.lng)})
+    }}));
+    console.log(coordinates);
   };
 
-  
 //----------------------------------------------close and open menu-----------------------------------
   const openMenu = () => {
     setMenuOpen(true);
@@ -69,12 +80,8 @@ export const AppProvider = (props) => {
   const loadWatchList=()=>{
       const showWatchListinside = [];
       watchListUnique.map((cityName)=>(
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`
-        )
-        .then(response=>response.json())
-        .then(data=>showWatchListinside.push(data))
-        ));
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`)
+      .then(response=>showWatchListinside.push(response.data))));
       setShowWatchList(showWatchListinside);
       console.log(showWatchList);
   }
@@ -117,7 +124,7 @@ export const AppProvider = (props) => {
     showWatchList,
     removeFromWatch,
     watchListUnique,
-    loadWatchList
+    loadWatchList,
   };
 
 

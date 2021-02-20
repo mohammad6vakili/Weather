@@ -11,14 +11,13 @@ const Watchlist=()=>{
     const{
         showWatchList,
         removeFromWatch,
-        cancel,
-    }=useContext(AppContext)
+        cancel
+        }=useContext(AppContext)
 
     return(
         <div className='watchlist-wrapper'>
 
             
-
 
             {showWatchList.map((city)=>(
                         <div key={uuidv4()} className='watch-city-box mb-3'>

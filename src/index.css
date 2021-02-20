@@ -6,7 +6,7 @@
 }
 @font-face {
   font-family: Yekan;
-  src: url(./font/Yekan\ Bakh\ EN\ 05\ Medium.ttf);
+  src: url(./Assets/Yekan\ Bakh\ EN\ 05\ Medium.ttf);
 }
 .App {
   width: 100%;
@@ -34,7 +34,7 @@
   padding-bottom: 0px !important;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 50px;
   position: relative;
 }
@@ -78,10 +78,10 @@
 
 .search-form {
   width: 50%;
-  position: relative;
+  position: fixed;
+  top: 12px;
   display: flex;
   justify-content: center;
-  margin-left: 65px;
 }
 .search-box {
   width: 90% !important;
@@ -108,6 +108,10 @@
   color: white;
   font-size: 28px;
   cursor: pointer;
+  padding-right: 70px;
+}
+#menu-button{
+  padding-left: 70px;
 }
 #menu-button i {
   color: white;
@@ -143,9 +147,9 @@
 /* ------------------------------------------------city box------------------------------------------------ */
 .weather-wrapper {
   width: 100%;
-  /* border: 1px solid white; */
   display: flex;
   justify-content: center;
+  position: relative;
   align-items: center;
 }
 .city-box {

@@ -4,8 +4,12 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'antd/dist/antd.css';
 import App from './App';
+import {AppProvider} from './AppContext'; 
+
 
 ReactDOM.render(
-    <App />,
+    <AppProvider>
+    <App />
+    </AppProvider>,
   document.getElementById('root')
 );
