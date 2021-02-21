@@ -7,10 +7,13 @@ const City=()=>{
     const{
         city,
         addToWatch,
-        cancel
+        cancel,
+        getForecast
     }=useContext(AppContext)
     
     return(
+    <div className='city-wrapper'>
+
         <div className='city-box'>
             <div className="city-info">
                 <div className='d-flex'>
@@ -42,24 +45,17 @@ const City=()=>{
             <div className="city-weather">
                 <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>
                 <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.humidity)}{" "} %</span></div>
-                <div className='min-max-temp border-bottom border-secondary'>
-                    <div className='max-temp justify-content-around'>
-                        <span style={{fontSize:30+'px'}} className='m-0 d-flex align-items-end justify-content-center'><span className='h-75'>{Math.floor(city.main.temp_max - 273.15)+'°'}</span><strong style={{fontSize:18+'px'}}>C</strong></span>
-                        <div className='justify-content-center'>
-                          <i style={{fontSize:28+'px'}} className="fa fa-arrow-up text-success"></i>
-                          <h5 className='pt-2 pl-1'>Max</h5>
-                        </div>
-                    </div>
-                    <div className='min-temp justify-content-around'>
-                        <span style={{fontSize:30+'px'}} className='m-0 d-flex align-items-end justify-content-center'><span className='h-75'>{Math.floor(city.main.temp_min - 273.15)+'°'}</span><strong style={{fontSize:18+'px'}}>C</strong></span>
-                        <div className='justify-content-center'>
-                          <i style={{fontSize:28+'px'}} className="fa fa-arrow-down text-danger"></i>
-                          <h5 className='pt-2 pl-1'>Min</h5>
-                        </div>
-                    </div>
-                </div>
+                <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.pressure)}{" "} M</span></div>
+                <div><h5>Feels like</h5><span style={{fontSize:16+'px'}}>{Math.floor(city.main.feels_like - 273.15)+'°'}<strong style={{fontSize:12+'px'}}>C</strong></span></div>
             </div>
         </div>
+
+        <div className='forecast-btns'>
+            <button onClick={getForecast} className="forecast-btn">48 hours forecast</button>
+            <button onClick={getForecast} className="forecast-btn">7 days forecast</button>
+        </div>
+    
+    </div>
     )
 }
 export default City;

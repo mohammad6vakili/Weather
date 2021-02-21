@@ -13,9 +13,10 @@ const Home = () => {
 
   return (
     <div className="weather-wrapper mb-5">
-      {/* {queryActive ? 
+      .
+       {queryActive ? 
         <City />
-       : */}
+       : 
        
         <div className="home-wrapper">
           <Zoom>
@@ -45,7 +46,7 @@ const Home = () => {
             </div>
           </Fade>
         </div>
-      {/* } */}
+       }
       <Fade top>
         <form className="search-form" onSubmit={getData}>
           <input
