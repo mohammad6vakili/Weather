@@ -195,23 +195,31 @@
   width: 30%;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 30px;
 }
 .forecast-btn{
   width:150px;
   height: 60px;
-  background-color: rgb(21, 151, 64);
-  box-shadow: 1px 1px 5px rgb(46, 255, 91);
+  background-color: rgb(236, 236, 236);
+  box-shadow: 1px 1px 5px rgb(165, 165, 165);
   border: none;
   font-weight: 900;
   font-size: 19px;
-  color: white;
+  color: black;
   border-radius: 4px;
   padding: 0px 3px 0px 3px;
   cursor: pointer;
 }
 .forecast-btn:hover{
-  background-color: rgb(0, 194, 65);
+  background-color: rgb(51, 51, 51);
+  color: white;
+  box-shadow: none;
 }
+.forecast-wrapper{
+  width: 100%;
+  border: 1px solid white;
+}
+
 /* -------------------------------------------------------------------------------------------------- */
 /* -------------------------------------------------Home--------------------------------------------- */
 .home-wrapper {

@@ -1,6 +1,12 @@
 import React,{useContext} from 'react';
 import {AppContext} from '../AppContext';
 import {Popconfirm} from 'antd';
+import Fade from 'react-reveal';
+import Zoom from 'react-reveal';
+import Hourly from './Hourly';
+import Daily from './Daily';
+import {Link} from 'react-router-dom';
+import {BrowserRouter as Router , Switch , Route} from 'react-router-dom';
 
 const City=()=>{
     
@@ -8,12 +14,14 @@ const City=()=>{
         city,
         addToWatch,
         cancel,
-        getForecast
+        showHourly,
+        showDaily
     }=useContext(AppContext)
     
     return(
     <div className='city-wrapper'>
 
+      <Zoom clear>
         <div className='city-box'>
             <div className="city-info">
                 <div className='d-flex'>
@@ -49,12 +57,26 @@ const City=()=>{
                 <div><h5>Feels like</h5><span style={{fontSize:16+'px'}}>{Math.floor(city.main.feels_like - 273.15)+'°'}<strong style={{fontSize:12+'px'}}>C</strong></span></div>
             </div>
         </div>
-
+       </Zoom>
+        <Router>
         <div className='forecast-btns'>
-            <button onClick={getForecast} className="forecast-btn">48 hours forecast</button>
-            <button onClick={getForecast} className="forecast-btn">7 days forecast</button>
+            <Fade left>
+                <Link to='/hourly'>
+                    <button onClick={showHourly} className="forecast-btn mr-1">48 hours forecast</button>
+                </Link>
+            </Fade>
+            <Fade right>
+                <Link to='daily'>
+                    <button onClick={showDaily} className="forecast-btn ml-1">7 days forecast</button>
+                </Link>
+            </Fade>
         </div>
-    
+
+        <div className="forecast-wrapper">
+            <Route path='/hourly' component={Hourly} />
+            <Route path='/daily' component={Daily} />
+        </div>
+        </Router>
     </div>
     )
 }

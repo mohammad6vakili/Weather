@@ -17,6 +17,8 @@ export const AppProvider = (props) => {
   const [showWatchList, setShowWatchList] = useState([]);
   const [coord , setCoord]=useState('');
   const [forecast , setForecast]=useState({});
+  const [hourly , setHourly]=useState(false);
+  const [daily , setDaily]=useState(false);
 
 //----------------------------------------------Component Did Mount----------------------------------
   
@@ -39,17 +41,31 @@ export const AppProvider = (props) => {
   }}
 
 
-//-----------------------------------------------get city forecast-----------------------------------
-  const getForecast=()=>{
-    console.log(coord);
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
-    .then(res=>setForecast(res.data));
-    console.log(forecast);
-  };
+//---------------------------------------------show hourly forecast---------------------------------
+const showHourly=()=>{
+  setHourly(true);
+  console.log(coord);
+  axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
+  .then(res=>setForecast(res.data));
+  console.log(forecast);
+}
+
+
+//----------------------------------------------show daily forecast---------------------------------
+const showDaily=()=>{
+  setDaily(true);
+  console.log(coord);
+  axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
+  .then(res=>setForecast(res.data));
+  console.log(forecast);
+}
+
+
 //-----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);
   };
+
 
 //----------------------------------------------close and open menu----------------------------------
   const openMenu = () => {
@@ -122,7 +138,10 @@ export const AppProvider = (props) => {
     removeFromWatch,
     watchListUnique,
     loadWatchList,
-    getForecast
+    showHourly,
+    hourly,
+    showDaily,
+    daily
   };
 
 
