@@ -1,11 +1,19 @@
-import React from 'react';
-import {AppContext} from '../AppContext';
+import React,{useContext} from "react";
+import { AppContext } from "../AppContext";
+import Fade from 'react-reveal';
 
-const Daily =()=>{
-    return(
+const Daily = () => {
 
-<h1>Daily</h1>
+    const{
+        setShowForecast,
+    }=useContext(AppContext)
 
-    )
-}
+  return (
+    <Fade bottom>
+        <div className="daily-wrapper">
+            <div onClick={() => setShowForecast(0)} className="forecast-close-btn"><i className="fa fa-chevron-up"></i></div>
+        </div>
+    </Fade>
+  );
+};
 export default Daily;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState,useEffect ,createContext } from "react";
 import { message } from "antd";
 import axios from "axios";
 
@@ -16,13 +16,16 @@ export const AppProvider = (props) => {
   const [watchListUnique , setWatchListUnique]=useState(JSON.parse(localStorage.getItem('watchlist')));
   const [showWatchList, setShowWatchList] = useState([]);
   const [coord , setCoord]=useState('');
-  const [forecast , setForecast]=useState({});
-  const [hourly , setHourly]=useState(false);
-  const [daily , setDaily]=useState(false);
+  const [forecast , setForecast]=useState(null);
+  const [showForecast , setShowForecast]=useState(0);
+  const [time , setTime]=useState([]);
 
 //----------------------------------------------Component Did Mount----------------------------------
   
-
+useEffect(() => {
+  getTime();
+  console.log(time);
+}, [])
 
 
 //------------------------------------------------get city data--------------------------------------
@@ -38,29 +41,45 @@ export const AppProvider = (props) => {
     });
     setQueryActive(true);
     console.log(city);
+    setShowForecast(0);
   }}
 
 
 //---------------------------------------------show hourly forecast---------------------------------
-const showHourly=()=>{
-  setHourly(true);
-  console.log(coord);
-  axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
-  .then(res=>setForecast(res.data));
-  console.log(forecast);
+const showHourly=async()=>{
+  setShowForecast(1);
+  try{
+  const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
+  console.log(response.data);
+  setForecast(response.data);
+  }catch{
+    console.log('error');
+  }
 }
 
 
 //----------------------------------------------show daily forecast---------------------------------
-const showDaily=()=>{
-  setDaily(true);
+const showDaily=async()=>{
+  setShowForecast(2);
   console.log(coord);
-  axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
+  await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
   .then(res=>setForecast(res.data));
   console.log(forecast);
+  console.log(showForecast);
 }
 
 
+//--------------------------------------------------get hour-----------------------------------------
+const getTime=()=>{
+  let date=new Date();
+  let hour=date.getHours();
+  for(let i=0;i<=47;i++){
+    if(hour===25){
+      hour=1
+    }
+   time.push(JSON.stringify(hour++))
+  }
+}
 //-----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);
@@ -139,9 +158,11 @@ const showDaily=()=>{
     watchListUnique,
     loadWatchList,
     showHourly,
-    hourly,
     showDaily,
-    daily
+    showForecast,
+    setShowForecast,
+    forecast,
+    time
   };
 
 

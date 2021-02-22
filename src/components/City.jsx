@@ -5,8 +5,7 @@ import Fade from 'react-reveal';
 import Zoom from 'react-reveal';
 import Hourly from './Hourly';
 import Daily from './Daily';
-import {Link} from 'react-router-dom';
-import {BrowserRouter as Router , Switch , Route} from 'react-router-dom';
+
 
 const City=()=>{
     
@@ -15,7 +14,8 @@ const City=()=>{
         addToWatch,
         cancel,
         showHourly,
-        showDaily
+        showDaily,
+        showForecast,
     }=useContext(AppContext)
     
     return(
@@ -58,25 +58,18 @@ const City=()=>{
             </div>
         </div>
        </Zoom>
-        <Router>
         <div className='forecast-btns'>
             <Fade left>
-                <Link to='/hourly'>
                     <button onClick={showHourly} className="forecast-btn mr-1">48 hours forecast</button>
-                </Link>
             </Fade>
             <Fade right>
-                <Link to='daily'>
                     <button onClick={showDaily} className="forecast-btn ml-1">7 days forecast</button>
-                </Link>
             </Fade>
         </div>
-
         <div className="forecast-wrapper">
-            <Route path='/hourly' component={Hourly} />
-            <Route path='/daily' component={Daily} />
+            {showForecast===1 && <Hourly/>}
+            {showForecast===2 && <Daily/>}
         </div>
-        </Router>
     </div>
     )
 }
