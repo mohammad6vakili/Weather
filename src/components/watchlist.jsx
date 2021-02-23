@@ -19,7 +19,7 @@ const Watchlist=()=>{
 
             
 
-            {showWatchList.map((city)=>(
+            {showWatchList && showWatchList.map((city)=>(
                         <div key={uuidv4()} className='watch-city-box mb-3'>
                         <div className="city-info">
                             <div className='d-flex'>

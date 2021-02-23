@@ -24,7 +24,7 @@ export const AppProvider = (props) => {
   
 useEffect(() => {
   getTime();
-  console.log(time);
+  loadWatchList();
 }, [])
 
 
@@ -79,7 +79,8 @@ const getTime=()=>{
     }
    time.push(JSON.stringify(hour++))
   }
-}
+  }
+  
 //-----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);

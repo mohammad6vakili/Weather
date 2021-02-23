@@ -53,7 +53,7 @@ const City=()=>{
             <div className="city-weather">
                 <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>
                 <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.humidity)}{" "} %</span></div>
-                <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.pressure)}{" "} M</span></div>
+                <div className='border-bottom border-secondary'><h5>Pressure</h5><span>{Math.floor(city.main.pressure)}{" "} M</span></div>
                 <div><h5>Feels like</h5><span style={{fontSize:16+'px'}}>{Math.floor(city.main.feels_like - 273.15)+'°'}<strong style={{fontSize:12+'px'}}>C</strong></span></div>
             </div>
         </div>
@@ -66,6 +66,7 @@ const City=()=>{
                     <button onClick={showDaily} className="forecast-btn ml-1">7 days forecast</button>
             </Fade>
         </div>
+        
         <div className="forecast-wrapper">
             {showForecast===1 && <Hourly/>}
             {showForecast===2 && <Daily/>}
