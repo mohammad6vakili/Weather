@@ -14,7 +14,7 @@
   flex-direction: column;
   position: relative;
   overflow-y: auto;
-  height: 100vh;
+  min-height: 100vh;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     135deg,
@@ -29,6 +29,7 @@
     rgba(38, 73, 111, 1) 100%
   );
 }
+/*--------------------------------------------navigation and menu------------------------------------- */
 .navigation {
   height: 70px;
   padding-bottom: 0px !important;
@@ -40,7 +41,7 @@
 }
 
 .menu-open {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 20%;
@@ -90,7 +91,7 @@
   align-items: center;
   padding-left: 15px;
   border: none;
-  box-shadow: 1px 2px 10px rgba(255, 255, 255, 0.712);
+  box-shadow: 1px 2px 15px rgba(255, 255, 255, 0.877);
 }
 .search-btn {
   position: absolute;
@@ -131,6 +132,7 @@
   color: rgb(255, 255, 255);
   border: 1px solid rgb(255, 255, 255);
   box-shadow: 1px 2px 5px rgb(255, 255, 255);
+  background: rgba(121, 114, 114, 0.226);
 }
 .menu-close-button:hover {
   color: black;
@@ -143,7 +145,6 @@
   width: 100%;
   overflow-y: auto;
 }
-/* -------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------city box------------------------------------------------ */
 .weather-wrapper {
   width: 100%;
@@ -191,6 +192,7 @@
   display: flex;
   justify-content: space-between;
 }
+/* ----------------------------------------------forecast----------------------------------------- */
 .forecast-btns{
   width: 30%;
   display: flex;
@@ -220,25 +222,26 @@
   display: flex;
   border-radius: 5px;
   flex-direction: column;
-  background-color: whitesmoke;
+  background-color: rgb(240, 238, 238);
   align-items: center;
   justify-content: space-between;
-  
+  box-shadow: 2px 1px 8px whitesmoke;
 }
 .forecast-close-btn{
-  width: 100px;
-  height: 25px;
+  width: 200px;
+  height: 30px;
   border-radius: 0px 0px 8px 8px;
   text-align: center;
   font-size: 20px;
   background-color: rgb(26, 26, 26);
   color: whitesmoke;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 .forecast-close-btn:hover{
-  background-color: rgba(26, 26, 26, 0.692);
+  background-color: rgba(180, 12, 12, 0.918);
   cursor: pointer;
 }
+/* ---------------------------------------------hourly forecast---------------------------------------- */
 .hourly-wrapper{
   width: 100%;
   display: flex;
@@ -246,9 +249,16 @@
 .forecast-item{
   width: 100%;
   display: flex;
-  border-bottom: 1px solid rgba(204, 203, 203, 0.26);
+  border-bottom: 1px solid rgba(204, 203, 203, 0.836);
   height: 50px;
   align-items: center;
+}
+#forecast-item{
+  background-color: rgba(199, 213, 224, 0.658);
+}
+
+#forecast-item:hover{
+  background-color: rgb(140, 180, 212);
 }
 .forecast-item div{
   width: 25%;
@@ -260,14 +270,15 @@
   width: 10%;
 }
 .time-item{
-  border-bottom: 1px solid rgba(204, 203, 203, 0.26);
+  border-bottom: 1px solid rgba(204, 203, 203, 0.493);
+  background-color: rgba(188, 183, 202, 0.151);
   height: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
 }
+
 .forecast-container{
   width: 90%;
 }
@@ -277,7 +288,38 @@
   font-weight: 800;
   text-shadow: 1px 2px 3px steelblue;
 }
-/* -------------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------daily wrapper---------------------------------------- */
+.daily-wrapper{
+  width: 100%;
+  border: 1px solid   purple;
+  display: flex;
+  align-items: flex-start;
+}
+.daily-forecast-time{
+  width:20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.daily-forecast-detail{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.daily-forecast-time-item{
+  width: 100%;
+  height: 150px;
+  border: 1px solid red;
+}
+.daily-forecast-detail-item{
+  width: 100%;
+  height: 150px;
+  border: 1px solid blue;
+}
 /* -------------------------------------------------Home--------------------------------------------- */
 .home-wrapper {
   width: 100%;
@@ -386,7 +428,6 @@
     top:200%
   }
 }
-/* ------------------------------------------------------------------------------------------------ */
 /* -----------------------------------------Watchlist---------------------------------------------- */
 .watchlist-wrapper{
   width: 100%;

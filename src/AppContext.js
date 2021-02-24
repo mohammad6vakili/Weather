@@ -16,15 +16,16 @@ export const AppProvider = (props) => {
   const [watchListUnique , setWatchListUnique]=useState(JSON.parse(localStorage.getItem('watchlist')));
   const [showWatchList, setShowWatchList] = useState([]);
   const [coord , setCoord]=useState('');
+  const [dailyForecast , setDailyForecast]=useState([]);
   const [forecast , setForecast]=useState(null);
   const [showForecast , setShowForecast]=useState(0);
   const [time , setTime]=useState([]);
+  const [dateDay , setDateDay]=useState([]);
 
 //----------------------------------------------Component Did Mount----------------------------------
   
 useEffect(() => {
-  getTime();
-  loadWatchList();
+  // loadWatchList();
 }, [])
 
 
@@ -40,37 +41,33 @@ useEffect(() => {
       setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
     });
     setQueryActive(true);
-    console.log(city);
     setShowForecast(0);
+    getTime();
+    getDate();
   }}
 
 
 //---------------------------------------------show hourly forecast---------------------------------
 const showHourly=async()=>{
   setShowForecast(1);
-  try{
   const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
-  console.log(response.data);
   setForecast(response.data);
-  }catch{
-    console.log('error');
-  }
+  console.log(forecast);
 }
 
 
 //----------------------------------------------show daily forecast---------------------------------
 const showDaily=async()=>{
   setShowForecast(2);
-  console.log(coord);
-  await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`)
-  .then(res=>setForecast(res.data));
-  console.log(forecast);
-  console.log(showForecast);
+  const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
+  setDailyForecast(response.data.daily.shift());
+  console.log(dailyForecast);
 }
 
 
 //--------------------------------------------------get hour-----------------------------------------
 const getTime=()=>{
+  setTime([]);
   let date=new Date();
   let hour=date.getHours();
   for(let i=0;i<=47;i++){
@@ -79,8 +76,52 @@ const getTime=()=>{
     }
    time.push(JSON.stringify(hour++))
   }
+  console.log(time);
   }
   
+
+//--------------------------------------------------get day------------------------------------------
+const getDate=()=>{
+  setDateDay([]);
+let date = new Date();
+let day = date.getDay();
+let insideDay=[];
+for(let i=0 ; i<7 ; i++){
+  if(day===6){
+    day=-1
+  }
+  day++;
+  insideDay.push(day);
+}
+insideDay.map((item)=>{
+  switch (item) {
+    case 0:
+      dateDay.push('Sunday');
+      break;
+    case 1:
+      dateDay.push('Monday');
+      break;
+    case 2:
+      dateDay.push('Tuesday');
+      break;
+    case 3:
+      dateDay.push('Wednesday');
+      break;
+    case 4:
+      dateDay.push('Thursday');
+      break;
+    case 5:
+      dateDay.push('Friday');
+      break;
+    case 6:
+      dateDay.push('Saturday');
+      break;
+  }
+})
+console.log(dateDay);
+}
+
+
 //-----------------------------------------------get query value-------------------------------------
   const getQuery = (e) => {
     setQuery(e.target.value);
@@ -163,7 +204,8 @@ const getTime=()=>{
     showForecast,
     setShowForecast,
     forecast,
-    time
+    time,
+    dateDay
   };
 
 
