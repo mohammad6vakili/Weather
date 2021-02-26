@@ -111,7 +111,7 @@
   cursor: pointer;
   padding-right: 70px;
 }
-#menu-button{
+#menu-button {
   padding-left: 70px;
 }
 #menu-button i {
@@ -141,7 +141,7 @@
   cursor: pointer;
 }
 /* --------------------------------------------------main-------------------------------------------------- */
-.main-wrapper{
+.main-wrapper {
   width: 100%;
   overflow-y: auto;
 }
@@ -153,7 +153,7 @@
   position: relative;
   align-items: center;
 }
-.city-wrapper{
+.city-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -193,14 +193,14 @@
   justify-content: space-between;
 }
 /* ----------------------------------------------forecast----------------------------------------- */
-.forecast-btns{
+.forecast-btns {
   width: 30%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
 }
-.forecast-btn{
-  width:150px;
+.forecast-btn {
+  width: 150px;
   height: 60px;
   background-color: rgb(236, 236, 236);
   box-shadow: 1px 1px 5px rgb(165, 165, 165);
@@ -212,12 +212,12 @@
   padding: 0px 3px 0px 3px;
   cursor: pointer;
 }
-.forecast-btn:hover{
+.forecast-btn:hover {
   background-color: rgb(51, 51, 51);
   color: white;
   box-shadow: none;
 }
-.forecast-wrapper{
+.forecast-wrapper {
   width: 80%;
   display: flex;
   border-radius: 5px;
@@ -227,7 +227,7 @@
   justify-content: space-between;
   box-shadow: 2px 1px 8px whitesmoke;
 }
-.forecast-close-btn{
+.forecast-close-btn {
   width: 200px;
   height: 30px;
   border-radius: 0px 0px 8px 8px;
@@ -237,39 +237,39 @@
   color: whitesmoke;
   margin-bottom: 70px;
 }
-.forecast-close-btn:hover{
+.forecast-close-btn:hover {
   background-color: rgba(180, 12, 12, 0.918);
   cursor: pointer;
 }
 /* ---------------------------------------------hourly forecast---------------------------------------- */
-.hourly-wrapper{
+.hourly-wrapper {
   width: 100%;
   display: flex;
 }
-.forecast-item{
+.forecast-item {
   width: 100%;
   display: flex;
   border-bottom: 1px solid rgba(204, 203, 203, 0.836);
   height: 50px;
   align-items: center;
 }
-#forecast-item{
+#forecast-item {
   background-color: rgba(199, 213, 224, 0.658);
 }
 
-#forecast-item:hover{
+#forecast-item:hover {
   background-color: rgb(140, 180, 212);
 }
-.forecast-item div{
+.forecast-item div {
   width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.time-wrapper{
+.time-wrapper {
   width: 10%;
 }
-.time-item{
+.time-item {
   border-bottom: 1px solid rgba(204, 203, 203, 0.493);
   background-color: rgba(188, 183, 202, 0.151);
   height: 50px;
@@ -279,46 +279,121 @@
   justify-content: center;
 }
 
-.forecast-container{
+.forecast-container {
   width: 90%;
 }
-.forecast-title{
+.forecast-title {
   font-size: 22px;
   color: rgb(28, 28, 90);
   font-weight: 800;
   text-shadow: 1px 2px 3px steelblue;
 }
 
-/* ---------------------------------------------daily wrapper---------------------------------------- */
-.daily-wrapper{
-  width: 100%;
-  border: 1px solid   purple;
+/* ---------------------------------------------daily forecast---------------------------------------- */
+.daily-wrapper {
+  width: 75%;
   display: flex;
   align-items: flex-start;
 }
-.daily-forecast-time{
-  width:20%;
+.daily-forecast-time {
+  width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.daily-forecast-detail{
+.daily-forecast-detail {
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #203040;
 }
-.daily-forecast-time-item{
+.daily-forecast-time-item,
+.daily-forecast-detail-item {
   width: 100%;
-  height: 150px;
-  border: 1px solid red;
+  height: 250px;
+  background-color: rgba(145, 130, 187, 0.404);
+  margin-bottom: 50px;
 }
-.daily-forecast-detail-item{
+.daily-forecast-time-item {
+  font-size: 28px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(3, 3, 24, 0.788);
+  text-shadow: 1px 2px 5px rgb(41, 41, 160);
+  border-radius: 5px 0px 0px 5px;
+}
+.daily-forecast-detail-item {
+  border-radius: 0px 5px 5px 0px;
+  display: flex;
+}
+.daily-forecast-detail-item-left {
+  width: 40%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+}
+.daily-forecast-detail-item-left-MinMax {
+  display: flex;
+  height: 50%;
+}
+.daily-forecast-detail-item-left-MinMax div {
+  width: 50%;
+  display: flex;
+  font-size: 22px;
+  font-weight: 900;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.daily-forecast-detail-item-left-DayNight {
+  font-size: 28px;
+  display: flex;
+  font-weight: 900;
+  justify-content: space-between;
+  height: 50%;
+  align-items: center;
+  border-bottom: 1px solid rgba(185, 115, 115, 0.596);
+}
+.daily-forecast-detail-item-left-DayNight div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.daily-forecast-detail-item-right {
+  width: 60%;
+  padding: 10px;
+}
+.daily-forecast-detail-item-right div {
   width: 100%;
-  height: 150px;
-  border: 1px solid blue;
+  display: flex;
+  padding:5px 20px;
+}
+.daily-forecast-detail-item-right-des{
+  justify-content: center;
+  align-items: center;
+}
+.daily-forecast-detail-item-right-des span{
+  font-size: 22px;
+  font-weight: 900;
+}
+.daily-forecast-detail-item-right-wind,
+.daily-forecast-detail-item-right-humidity,
+.daily-forecast-detail-item-right-pressure{
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 900;
+  border-bottom: 1px solid rgba(185, 115, 115, 0.596);
+}
+.daily-forecast-detail-item-right-feelsLike{
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 900;
 }
 /* -------------------------------------------------Home--------------------------------------------- */
 .home-wrapper {
@@ -355,7 +430,7 @@
 .home-des {
   color: whitesmoke;
 }
-#home-cloud{
+#home-cloud {
   font-size: 200px;
   color: white;
   animation-name: cloud;
@@ -363,24 +438,24 @@
   animation-iteration-count: infinite;
   margin-bottom: 30px;
 }
-@keyframes cloud{
+@keyframes cloud {
   0% {
     text-shadow: 5px 5px 12px rgb(62, 181, 228);
   }
   50% {
-  text-shadow:none;
+    text-shadow: none;
   }
   100% {
     text-shadow: 5px 5px 12px rgb(62, 181, 228);
   }
 }
-.home-anim{
+.home-anim {
   width: 20%;
   display: flex;
   justify-content: center;
   position: relative;
 }
-.fa-tint{
+.fa-tint {
   color: rgb(46, 111, 207);
   font-size: 26px;
   position: absolute;
@@ -388,60 +463,92 @@
   animation-iteration-count: infinite;
   z-index: 1;
 }
-#water-one{
-  left:17%;
+#water-one {
+  left: 17%;
   animation-duration: 4s;
 }
-#water-two{
-  left:25%;
-  animation-duration: 6s;
-}
-#water-three{
-  left:33%;
-  animation-duration: 3s;
-}
-#water-four{
-  left:41%;
-  animation-duration: 6s;
-}
-#water-five{
-  left:49%;
-  animation-duration: 4s;
-}
-#water-six{
-  left:57%;
-  animation-duration: 3s;
-}
-#water-seven{
-  left:65%;
-  animation-duration: 6s;
-}
-#water-eight{
-  left:73%;
+#water-one-one {
+  left: 17%;
   animation-duration: 2s;
 }
-@keyframes rain{
-  0%{
-    top:170px
+#water-two {
+  left: 25%;
+  animation-duration: 6s;
+}
+#water-two-two {
+  left: 25%;
+  animation-duration: 3.7s;
+}
+#water-three {
+  left: 33%;
+  animation-duration: 7s;
+}
+#water-three-three {
+  left: 33%;
+  animation-duration: 5s;
+}
+#water-four {
+  left: 41%;
+  animation-duration: 6s;
+}
+#water-four-four {
+  left: 41%;
+  animation-duration: 3s;
+}
+#water-five {
+  left: 49%;
+  animation-duration: 4s;
+}
+#water-five-five {
+  left: 49%;
+  animation-duration: 2s;
+}
+#water-six {
+  left: 57%;
+  animation-duration: 1.5s;
+}
+#water-six-six {
+  left: 57%;
+  animation-duration: 6s;
+}
+#water-seven {
+  left: 65%;
+  animation-duration: 7s;
+}
+#water-seven-seven {
+  left: 65%;
+  animation-duration: 3s;
+}
+#water-eight {
+  left: 73%;
+  animation-duration: 2s;
+}
+#water-eight-eight {
+  left: 73%;
+  animation-duration: 5s;
+}
+@keyframes rain {
+  0% {
+    top: 170px;
   }
-  100%{
-    top:200%
+  100% {
+    top: 200%;
   }
 }
 /* -----------------------------------------Watchlist---------------------------------------------- */
-.watchlist-wrapper{
+.watchlist-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
-.watch-city-box{
+.watch-city-box {
   width: 30%;
   min-width: 300px;
   background-color: white;
   border: none;
-  border-radius: 8px ;
+  border-radius: 8px;
   box-shadow: 1px 2px 10px rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: space-between;

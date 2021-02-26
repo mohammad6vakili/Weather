@@ -16,7 +16,6 @@ export const AppProvider = (props) => {
   const [watchListUnique , setWatchListUnique]=useState(JSON.parse(localStorage.getItem('watchlist')));
   const [showWatchList, setShowWatchList] = useState([]);
   const [coord , setCoord]=useState('');
-  const [dailyForecast , setDailyForecast]=useState([]);
   const [forecast , setForecast]=useState(null);
   const [showForecast , setShowForecast]=useState(0);
   const [time , setTime]=useState([]);
@@ -26,6 +25,8 @@ export const AppProvider = (props) => {
   
 useEffect(() => {
   // loadWatchList();
+  getTime();
+  getDate();
 }, [])
 
 
@@ -42,8 +43,6 @@ useEffect(() => {
     });
     setQueryActive(true);
     setShowForecast(0);
-    getTime();
-    getDate();
   }}
 
 
@@ -60,14 +59,13 @@ const showHourly=async()=>{
 const showDaily=async()=>{
   setShowForecast(2);
   const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
-  setDailyForecast(response.data.daily.shift());
-  console.log(dailyForecast);
+  setForecast(response.data);
+  console.log(forecast);
 }
 
 
 //--------------------------------------------------get hour-----------------------------------------
 const getTime=()=>{
-  setTime([]);
   let date=new Date();
   let hour=date.getHours();
   for(let i=0;i<=47;i++){
@@ -82,10 +80,10 @@ const getTime=()=>{
 
 //--------------------------------------------------get day------------------------------------------
 const getDate=()=>{
-  setDateDay([]);
 let date = new Date();
 let day = date.getDay();
 let insideDay=[];
+insideDay.push(day);
 for(let i=0 ; i<7 ; i++){
   if(day===6){
     day=-1
@@ -115,6 +113,8 @@ insideDay.map((item)=>{
       break;
     case 6:
       dateDay.push('Saturday');
+      break;
+    default:
       break;
   }
 })

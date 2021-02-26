@@ -30,6 +30,14 @@ const Home = () => {
               <i id="water-six" className="fa fa-tint"></i>
               <i id="water-seven" className="fa fa-tint"></i>
               <i id="water-eight" className="fa fa-tint"></i>
+              <i id="water-one-one" className="fa fa-tint"></i>
+              <i id="water-two-two" className="fa fa-tint"></i>
+              <i id="water-three-three" className="fa fa-tint"></i>
+              <i id="water-four-four" className="fa fa-tint"></i>
+              <i id="water-five-five" className="fa fa-tint"></i>
+              <i id="water-six-six" className="fa fa-tint"></i>
+              <i id="water-seven-seven" className="fa fa-tint"></i>
+              <i id="water-eight-eight" className="fa fa-tint"></i>
             </div>
           </Zoom>
           <Fade bottom>
@@ -48,7 +56,7 @@ const Home = () => {
         </div>
        }
       <Fade top>
-        <form className="search-form" onSubmit={getData}>
+        <form className="search-form" onSubmit={getData} autoComplete="on">
           <input
             className="search-box form-control"
             value={query}
