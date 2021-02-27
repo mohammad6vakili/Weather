@@ -34,13 +34,14 @@ const App = () => {
                 <li className="menu-item">Git</li>
               </a>
 
-              <Link to="signup">
+              <Link to="/signup">
                 <li className="menu-item">SignUp</li>
               </Link>
 
-              <Link to="login">
+              <Link to="/login">
                 <li className="menu-item">Login</li>
               </Link>
+
 
               <button onClick={closeMenu} className="menu-close-button">
                 <i className="fa fa-chevron-left"></i>
@@ -70,7 +71,7 @@ const App = () => {
 
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="watchlist" component={Watchlist} />
+          <Route path="/watchlist" component={Watchlist} />
         </Switch>
       </div>
     </Router>

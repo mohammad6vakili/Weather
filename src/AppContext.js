@@ -9,25 +9,23 @@ export const AppProvider = (props) => {
 
 // ---------------------------------------------------States---------------------------------------
   const [query, setQuery] = useState("");
-  const [city, setCity] = useState([]);
+  const [city, setCity] = useState(null);
   const [queryActive, setQueryActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')));
-  const [watchListUnique , setWatchListUnique]=useState(JSON.parse(localStorage.getItem('watchlist')));
-  const [showWatchList, setShowWatchList] = useState([]);
+  const [showWatchList, setShowWatchList] = useState(null);
   const [coord , setCoord]=useState('');
   const [forecast , setForecast]=useState(null);
   const [showForecast , setShowForecast]=useState(0);
   const [time , setTime]=useState([]);
   const [dateDay , setDateDay]=useState([]);
 
+
 //----------------------------------------------Component Did Mount----------------------------------
-  
-useEffect(() => {
-  // loadWatchList();
-  getTime();
-  getDate();
-}, [])
+  useEffect(() => {
+    getTime();
+    getDate();
+  }, [])
 
 
 //------------------------------------------------get city data--------------------------------------
@@ -47,79 +45,77 @@ useEffect(() => {
 
 
 //---------------------------------------------show hourly forecast---------------------------------
-const showHourly=async()=>{
-  setShowForecast(1);
-  const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
-  setForecast(response.data);
-  console.log(forecast);
-}
+  const showHourly= async () => {
+    setShowForecast(1);
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
+    setForecast(response.data);
+    console.log(forecast);
+  }
 
 
 //----------------------------------------------show daily forecast---------------------------------
-const showDaily=async()=>{
-  setShowForecast(2);
-  const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
-  setForecast(response.data);
-  console.log(forecast);
-}
+  const showDaily=async()=>{
+    setShowForecast(2);
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
+    setForecast(response.data);
+    console.log(forecast);
+  }
 
 
 //--------------------------------------------------get hour-----------------------------------------
-const getTime=()=>{
-  let date=new Date();
-  let hour=date.getHours();
-  for(let i=0;i<=47;i++){
-    if(hour===25){
-      hour=1
+  const getTime=()=>{
+    let date=new Date();
+    let hour=date.getHours();
+    for(let i=0;i<=47;i++){
+      if(hour===25){
+        hour=1
+      }
+    time.push(JSON.stringify(hour++))
     }
-   time.push(JSON.stringify(hour++))
-  }
-  console.log(time);
   }
   
 
 //--------------------------------------------------get day------------------------------------------
-const getDate=()=>{
-let date = new Date();
-let day = date.getDay();
-let insideDay=[];
-insideDay.push(day);
-for(let i=0 ; i<7 ; i++){
-  if(day===6){
-    day=-1
+  const getDate=()=>{
+    let date = new Date();
+    let day = date.getDay();
+    let insideDay=[];
+    insideDay.push(day);
+    for(let i=0 ; i<7 ; i++){
+      if(day===6){
+        day=-1
+      }
+      day++;
+      insideDay.push(day);
+    }
+    insideDay.map((item)=>{
+      switch (item) {
+        case 0:
+          dateDay.push('Sunday');
+          break;
+        case 1:
+          dateDay.push('Monday');
+          break;
+        case 2:
+          dateDay.push('Tuesday');
+          break;
+        case 3:
+          dateDay.push('Wednesday');
+          break;
+        case 4:
+          dateDay.push('Thursday');
+          break;
+        case 5:
+          dateDay.push('Friday');
+          break;
+        case 6:
+          dateDay.push('Saturday');
+          break;
+        default:
+          break;
+      }
+    })
   }
-  day++;
-  insideDay.push(day);
-}
-insideDay.map((item)=>{
-  switch (item) {
-    case 0:
-      dateDay.push('Sunday');
-      break;
-    case 1:
-      dateDay.push('Monday');
-      break;
-    case 2:
-      dateDay.push('Tuesday');
-      break;
-    case 3:
-      dateDay.push('Wednesday');
-      break;
-    case 4:
-      dateDay.push('Thursday');
-      break;
-    case 5:
-      dateDay.push('Friday');
-      break;
-    case 6:
-      dateDay.push('Saturday');
-      break;
-    default:
-      break;
-  }
-})
-console.log(dateDay);
-}
 
 
 //-----------------------------------------------get query value-------------------------------------
@@ -141,38 +137,38 @@ console.log(dateDay);
 //-------------------------------------------add city to Watchlist-----------------------------------
   const addToWatch = (city) => {
     message.success("Added to Watchlist");
-    watchlist.push({name:city.name , id:city.id});
-    setWatchListUnique(Array.from(new Set(watchlist.map(a => a.id)))
+    setWatchlist(Array.from(new Set(watchlist.map(a => a.id)))
     .map(id => {
     return watchlist.find(a => a.id === id)}));
-    localStorage.setItem('watchlist',JSON.stringify(watchListUnique));
-    console.log(watchListUnique);
+    watchlist.push({name:city.name , id:city.id});
+    localStorage.setItem('watchlist',JSON.stringify(watchlist));
+    console.log(watchlist);
   };
 
 
 // ------------------------------------------------load watchlist-------------------------------------
-  const loadWatchList=()=>{
+  const loadWatchList=async()=>{
       const showWatchListinside = [];
-      watchListUnique.map((cityName)=>(
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName.name}&appid=498e14c3edcd5cadea0be9209c066677`)
-      .then(response=>showWatchListinside.push(response.data))));
+      for(let i=0 ; i<watchlist.length;i++){
+        let response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${watchlist[i].name}&appid=498e14c3edcd5cadea0be9209c066677`)
+        showWatchListinside.push(response.data);
+      }
       setShowWatchList(showWatchListinside);
-      console.log(showWatchList);
   }
 
 
 //-------------------------------------------remove city from Watchlist-------------------------------
   const removeFromWatch=(city)=>{
     const filterWatch = showWatchList;
-    const filterWatchName=watchListUnique;
+    const filterWatchName=watchlist;
     setShowWatchList(
     filterWatch.filter((item)=>(item.id!==city.id))
     )
-    setWatchListUnique(
+    setWatchlist(
     filterWatchName.filter((item)=>(item.id!==city.id))
     )
     localStorage.setItem('watchlist',JSON.stringify(filterWatchName.filter((item)=>(item.id!==city.id))));
-    console.log(watchListUnique);
+    console.log(watchlist);
   }
 
 
@@ -197,7 +193,6 @@ console.log(dateDay);
     watchlist,
     showWatchList,
     removeFromWatch,
-    watchListUnique,
     loadWatchList,
     showHourly,
     showDaily,

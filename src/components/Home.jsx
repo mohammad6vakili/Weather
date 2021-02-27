@@ -3,17 +3,19 @@ import Fade from "react-reveal";
 import Zoom from "react-reveal";
 import City from "./City";
 import { AppContext } from "../AppContext";
+
+
 const Home = () => {
   const {
     queryActive,
     getData,
     query,
-    getQuery,
+    getQuery
 } = useContext(AppContext);
 
   return (
     <div className="weather-wrapper mb-5">
-      .
+      
        {queryActive ? 
         <City />
        : 
