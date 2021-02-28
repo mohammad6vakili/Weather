@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Fade from "react-reveal";
 import Zoom from "react-reveal";
 import City from "./City";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../Contexts/AppContext";
 
 
 const Home = () => {
@@ -10,7 +10,8 @@ const Home = () => {
     queryActive,
     getData,
     query,
-    getQuery
+    getQuery,
+    profileModal
 } = useContext(AppContext);
 
   return (

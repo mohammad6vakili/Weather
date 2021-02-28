@@ -1,17 +1,25 @@
 import React, { useContext } from "react";
 import "./index.css";
-import { AppContext } from "./AppContext";
+import { AppContext } from "./Contexts/AppContext";
 import Fade from 'react-reveal';
-import { BrowserRouter as Router, Switch, Route ,Link} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route ,Link } from "react-router-dom";
 import Watchlist from "./components/watchlist";
 import Home from "./components/Home";
+import Signup from "./components/Signup";
+import Login from './components/Login';
+import Logo from './Assets/images/Logo.png';
+import Modal from "react-modal";
 
 const App = () => {
   const {
     openMenu,
     closeMenu,
-    menuOpen
+    menuOpen,
+    profileModal,
+    openProfileModal,
+    closeProfileModal
   } = useContext(AppContext);
+
 
   return (
     <Router>
@@ -38,10 +46,6 @@ const App = () => {
                 <li className="menu-item">SignUp</li>
               </Link>
 
-              <Link to="/login">
-                <li className="menu-item">Login</li>
-              </Link>
-
 
               <button onClick={closeMenu} className="menu-close-button">
                 <i className="fa fa-chevron-left"></i>
@@ -62,9 +66,8 @@ const App = () => {
             </div>
           </Fade>
           <Fade right>
-            <div className="register">
-              <span className="mr-2">SignUp</span>
-              <i className="fa fa-user"></i>
+            <div className="logo">
+                <img onClick={openProfileModal} style={{width:'80px'}} className='mt-4' src={Logo} alt="site logo" />
             </div>
           </Fade>
         </div>
@@ -72,7 +75,15 @@ const App = () => {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/watchlist" component={Watchlist} />
+          <Route path="/signup" component={Signup}/>
+          <Route path="/login" component={Login}/>
         </Switch>
+
+        {profileModal && 
+        <Modal className="profile-modal" isOpen={true} onRequestClose={closeProfileModal}>
+
+        </Modal>
+        }
       </div>
     </Router>
   );

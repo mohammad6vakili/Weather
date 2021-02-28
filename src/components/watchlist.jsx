@@ -1,8 +1,8 @@
 import React,{useContext,useEffect} from 'react';
-import {AppContext} from '../AppContext';
+import {AppContext} from '../Contexts/AppContext';
 import {v4 as uuidv4} from 'uuid';
 import {Popconfirm, Spin} from 'antd';
-
+import Zoom from 'react-reveal';
 
 
 const Watchlist=()=>{
@@ -21,6 +21,7 @@ const Watchlist=()=>{
         let watchlistData = <Spin tip='Loading...' size='large'/>
         if(showWatchList){
             watchlistData = 
+            <Zoom>
             <div className='watchlist-wrapper'>
                 {showWatchList && showWatchList.map((city)=>(
                             <div key={uuidv4()} className='watch-city-box mb-3'>
@@ -59,6 +60,7 @@ const Watchlist=()=>{
                         </div>
                 ))}
         </div>
+        </Zoom>
         }
 
     return(

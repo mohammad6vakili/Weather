@@ -4,12 +4,15 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'antd/dist/antd.css';
 import App from './App';
-import {AppProvider} from './AppContext'; 
+import {AppProvider} from './Contexts/AppContext'; 
+import {AuthProvider} from './Contexts/AuthContext';
 
 
 ReactDOM.render(
     <AppProvider>
-    <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </AppProvider>,
   document.getElementById('root')
 );

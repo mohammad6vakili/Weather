@@ -2,7 +2,9 @@ import React, { useState,useEffect ,createContext } from "react";
 import { message } from "antd";
 import axios from "axios";
 
+
 export const AppContext = createContext();
+
 
 export const AppProvider = (props) => {
 
@@ -19,6 +21,7 @@ export const AppProvider = (props) => {
   const [showForecast , setShowForecast]=useState(0);
   const [time , setTime]=useState([]);
   const [dateDay , setDateDay]=useState([]);
+  const [profileModal , setProfileModal]=useState(false);
 
 
 //----------------------------------------------Component Did Mount----------------------------------
@@ -178,6 +181,14 @@ export const AppProvider = (props) => {
   };
 
 
+//----------------------------------------------profile modal-----------------------------------------
+  const openProfileModal=()=>{
+    setProfileModal(true);
+  }
+
+  const closeProfileModal=()=>{
+    setProfileModal(false);
+  }
 //--------------------------------------------Pass to Provider----------------------------------------
   const value = {
     getData,
@@ -200,7 +211,10 @@ export const AppProvider = (props) => {
     setShowForecast,
     forecast,
     time,
-    dateDay
+    dateDay,
+    profileModal,
+    openProfileModal,
+    closeProfileModal
   };
 
 

@@ -1,5 +1,5 @@
 import React,{useContext} from "react";
-import { AppContext } from "../AppContext";
+import { AppContext } from "../Contexts/AppContext";
 import Zoom from 'react-reveal';
 import {v4 as uuidv4} from 'uuid';
 

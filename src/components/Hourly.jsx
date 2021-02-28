@@ -1,5 +1,5 @@
 import React,{useContext,useEffect} from 'react';
-import {AppContext} from '../AppContext';
+import {AppContext} from '../Contexts/AppContext';
 import {v4 as uuidv4} from 'uuid';
 import WindImage from '../Assets/images/wind-solid.svg';
 import WindStatus from '../Assets/images/cloud-sun-solid.svg';
