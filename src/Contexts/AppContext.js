@@ -1,7 +1,7 @@
 import React, { useState,useEffect ,createContext } from "react";
 import { message } from "antd";
 import axios from "axios";
-
+import Swal from 'sweetalert';
 
 export const AppContext = createContext();
 
@@ -35,7 +35,7 @@ export const AppProvider = (props) => {
   const getData = async (e) => {
     e.preventDefault();
     if(query===""){
-      alert('Enter a city name!')
+      Swal('Enter a city name!')
     }else{
     await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`)
     .then(function (response){
@@ -214,7 +214,8 @@ export const AppProvider = (props) => {
     dateDay,
     profileModal,
     openProfileModal,
-    closeProfileModal
+    closeProfileModal,
+    setProfileModal
   };
 
 

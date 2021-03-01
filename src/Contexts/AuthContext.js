@@ -15,7 +15,13 @@ export const AuthProvider = (props) =>{
     const [loading , setLoading]=useState(true);
 
 
-
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user=>{
+            setCurrentUser(user)
+            setLoading(false);
+        })
+        return unsubscribe
+        }, [])
 
     const signup =(email , password)=>{
         auth.createUserWithEmailAndPassword(email , password)
@@ -25,13 +31,11 @@ export const AuthProvider = (props) =>{
         auth.signInWithEmailAndPassword(email,password)
     }
 
-    useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user=>{
-        setCurrentUser(user)
-        setLoading(false);
-    })
-    return unsubscribe
-    }, [])
+    const logout = () => {
+        auth.signOut();
+    }
+
+
 
     
 
@@ -39,7 +43,8 @@ export const AuthProvider = (props) =>{
     const value = {
         currentUser,
         signup,
-        login
+        login,
+        logout
     }
 
 

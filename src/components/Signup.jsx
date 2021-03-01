@@ -1,8 +1,10 @@
-import React,{useRef , useState} from 'react';
-import {Form, Button ,Alert} from 'react-bootstrap';
+import React,{useRef , useState , useContext} from 'react';
+import {Form, Button} from 'react-bootstrap';
 import {useAuth} from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
-import {Link} from 'react-router-dom';
+import {Link, Redirect , useHistory} from 'react-router-dom';
+import {message} from 'antd';
+import swal from 'sweetalert';
 
 
 const Signup = () =>{
@@ -13,6 +15,7 @@ const passwordConfirmRef = useRef();
 const {signup} = useAuth();
 const [error , setError]=useState("");
 const [loading , setLoading]=useState(false);
+let history = useHistory();
 
 
 const handleSubmit= async (e) => {
@@ -24,6 +27,12 @@ const handleSubmit= async (e) => {
         setError("");
         setLoading(true)
         await signup(emailRef.current.value , passwordRef.current.value)
+        swal({
+            title: "Done!",
+            text: "Your account has created successfuly",
+            icon: "success",
+            button: history.push('/login'),
+          });
     }catch{
         setError("Failed to create an account")
     }
@@ -33,11 +42,11 @@ const handleSubmit= async (e) => {
 
     return(
 
-    <div className='signup-wrapper'>
+    <div className='forms-wrapper'>
         <Fade>
-        <div className='signup-form'>
+        <div className='forms'>
             <h2 className='text-center mt-2 mb-4'>Sign Up</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error && message.error(error)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>

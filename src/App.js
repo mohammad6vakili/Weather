@@ -8,16 +8,15 @@ import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Login from './components/Login';
 import Logo from './Assets/images/Logo.png';
-import Modal from "react-modal";
+import PrivateRoute from './components/PrivateRoute';
+
 
 const App = () => {
   const {
     openMenu,
     closeMenu,
     menuOpen,
-    profileModal,
     openProfileModal,
-    closeProfileModal
   } = useContext(AppContext);
 
 
@@ -43,7 +42,7 @@ const App = () => {
               </a>
 
               <Link to="/signup">
-                <li className="menu-item">SignUp</li>
+                <li className="menu-item">Create account</li>
               </Link>
 
 
@@ -73,17 +72,13 @@ const App = () => {
         </div>
 
         <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/watchlist" component={Watchlist} />
+          <PrivateRoute path="/" component={Home} exact />
+          <PrivateRoute path="/watchlist" component={Watchlist} />
           <Route path="/signup" component={Signup}/>
           <Route path="/login" component={Login}/>
         </Switch>
 
-        {profileModal && 
-        <Modal className="profile-modal" isOpen={true} onRequestClose={closeProfileModal}>
 
-        </Modal>
-        }
       </div>
     </Router>
   );

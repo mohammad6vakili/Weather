@@ -1,28 +1,32 @@
-import React,{useRef , useState} from 'react';
-import {Form, Button ,Alert} from 'react-bootstrap';
-import {useAuth} from '../Contexts/AuthContext';
+import React,{useRef ,useEffect, useState , useContext} from 'react';
+import {Form, Button } from 'react-bootstrap';
+import { useAuth } from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
 import {Link , useHistory} from 'react-router-dom';
+
 
 const Login = () =>{
 
 const emailRef = useRef();
 const passwordRef = useRef();
-const {login} = useAuth();
+const {login , currentUser} = useAuth();
 const [error , setError]=useState("");
 const [loading , setLoading]=useState(false);
 const history = useHistory();
 
+useEffect(() => {
+console.log(currentUser);
+}, []);
 
 const handleSubmit= async (e) => {
     e.preventDefault();
     try{
-        setError("");
-        setLoading(true)
-        await login(emailRef.current.value , passwordRef.current.value)
-        history.push('/');
+    setError("")
+    setLoading(true)
+    await login(emailRef.current.value , passwordRef.current.value)
+    history.push('/')
     }catch{
-        setError("Failed to Sign In")
+        setError("Falied to log in")
     }
     setLoading(false);
 }
@@ -30,11 +34,11 @@ const handleSubmit= async (e) => {
 
     return(
 
-    <div className='signup-wrapper'>
+    <div className='forms-wrapper'>
         <Fade>
-        <div className='signup-form'>
+        <div className='forms'>
             <h2 className='text-center mt-2 mb-4'>Log In</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error && alert(error)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
@@ -48,7 +52,7 @@ const handleSubmit= async (e) => {
             </Form>
         </div>
         <div className='w-100 text-center text-white mt-3'>Need an account? 
-        <Link style={{fontSize:'16px'}} className='text-white ml-2' to='signup'>Sign UP</Link>
+        <Link style={{fontSize:'16px'}} className='text-white ' to='signup'>Sign UP</Link>
         </div>
         </Fade>
     </div>
