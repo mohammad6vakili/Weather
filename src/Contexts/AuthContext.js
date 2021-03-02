@@ -1,18 +1,16 @@
-import React,{useContext,useState,useEffect } from 'react';
-import {auth} from '../Firebase';
+import React,{useState,useEffect } from 'react';
+import {auth} from '../Server';
 
 
-const AuthContext = React.createContext();
-
-export function useAuth(){
-    return useContext(AuthContext);
-}
+export const AuthContext = React.createContext();
 
 
 export const AuthProvider = (props) =>{
 
     const [currentUser , setCurrentUser]=useState();
     const [loading , setLoading]=useState(true);
+    const [isLogged , setIsLogged]=useState(false);
+    const [error , setError]=useState("");
 
 
     useEffect(() => {
@@ -33,8 +31,12 @@ export const AuthProvider = (props) =>{
 
     const logout = () => {
         auth.signOut();
+        setIsLogged(false)
     }
 
+    const resetPassword=(email)=>{
+        auth.sendPasswordResetEmail(email)
+    }
 
 
     
@@ -44,7 +46,12 @@ export const AuthProvider = (props) =>{
         currentUser,
         signup,
         login,
-        logout
+        logout,
+        isLogged,
+        setIsLogged,
+        error,
+        setError,
+        resetPassword
     }
 
 

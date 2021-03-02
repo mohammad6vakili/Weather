@@ -2,6 +2,7 @@ import React,{useContext} from "react";
 import { AppContext } from "../Contexts/AppContext";
 import Zoom from 'react-reveal';
 import {v4 as uuidv4} from 'uuid';
+import {Spin} from 'antd';
 
 
 const Daily = () => {
@@ -12,17 +13,11 @@ const Daily = () => {
         dateDay
     }=useContext(AppContext)
 
-  return (
-    <React.Fragment>
-      <Zoom>
-
-              <div onClick={() => setShowForecast(0)} className="forecast-close-btn">
-                <i className="fa fa-chevron-up"></i>
-              </div>
-
-              <div className="daily-wrapper">
-
-                  <div className='daily-forecast-time'>
+    let dailyLoaded = <Spin className='w-100' tip='Loading...' size='large'/>
+    if(forecast){
+      dailyLoaded =
+        <React.Fragment>
+                            <div className='daily-forecast-time'>
                   {dateDay && dateDay.map((item)=>(
                     <div key={uuidv4()} className='daily-forecast-time-item'>
                         <span>{item}</span>
@@ -80,7 +75,20 @@ const Daily = () => {
                       </div>
                   ))}
                   </div>
+        </React.Fragment>
+    }
 
+
+  return (
+    <React.Fragment>
+      <Zoom>
+
+              <div onClick={() => setShowForecast(0)} className="forecast-close-btn">
+                <i className="fa fa-chevron-up"></i>
+              </div>
+
+              <div className="daily-wrapper">
+                {dailyLoaded}
               </div>
 
       </Zoom>

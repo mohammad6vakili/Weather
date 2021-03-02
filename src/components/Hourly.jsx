@@ -5,6 +5,7 @@ import WindImage from '../Assets/images/wind-solid.svg';
 import WindStatus from '../Assets/images/cloud-sun-solid.svg';
 import Humidity from '../Assets/images/water-solid.svg';
 import Zoom from 'react-reveal';
+import {Spin} from 'antd';
 
 
 const Hourly =()=>{
@@ -16,6 +17,31 @@ const Hourly =()=>{
         time
     }=useContext(AppContext)
 
+    let forecastLoaded=<Spin className='w-100' tip='Loading...' size='large'/>
+    if(forecast){
+
+        forecastLoaded =
+        <React.Fragment>
+        {forecast && forecast.hourly.map((item)=>(
+            <div key={uuidv4()} id='forecast-item' className='forecast-item text-secondary'>
+                <div>
+                    <span>{Math.floor(item.temp - 273.15)+'°'}<strong style={{fontSize:16+'px'}}>C</strong></span>
+                </div>
+                <div>
+                    <span>{item.weather[0].description}
+                        <img style={{width:30+'px'}} src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
+                    </span>
+                </div>
+                <div>
+                    <span>{Math.floor(item.wind_speed)}{" "} km/h</span>    
+                </div>
+                <div>
+                    <span>{item.humidity} {" "} %</span>
+                </div>
+            </div>
+    ))} 
+    </React.Fragment>
+    }
 
 
     return(
@@ -51,24 +77,7 @@ const Hourly =()=>{
                                     <img style={{width:30+'px'}} src={Humidity} alt="humidity"/>
                                 </div>
                             </div>
-                            {forecast && forecast.hourly.map((item)=>(
-                                    <div key={uuidv4()} id='forecast-item' className='forecast-item text-secondary'>
-                                        <div>
-                                            <span>{Math.floor(item.temp - 273.15)+'°'}<strong style={{fontSize:16+'px'}}>C</strong></span>
-                                        </div>
-                                        <div>
-                                            <span>{item.weather[0].description}
-                                                <img style={{width:30+'px'}} src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span>{Math.floor(item.wind_speed)}{" "} km/h</span>    
-                                        </div>
-                                        <div>
-                                            <span>{item.humidity} {" "} %</span>
-                                        </div>
-                                    </div>
-                            ))}
+                            {forecastLoaded}
                         </div>
                     </div>
                     </Zoom>

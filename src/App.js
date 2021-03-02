@@ -9,6 +9,8 @@ import Signup from "./components/Signup";
 import Login from './components/Login';
 import Logo from './Assets/images/Logo.png';
 import PrivateRoute from './components/PrivateRoute';
+import { AuthContext } from "./Contexts/AuthContext";
+import ForgotPassword from "./components/ForgotPassword";
 
 
 const App = () => {
@@ -19,6 +21,10 @@ const App = () => {
     openProfileModal,
   } = useContext(AppContext);
 
+  const {
+    logout,
+    currentUser
+  }=useContext(AuthContext);
 
   return (
     <Router>
@@ -38,13 +44,20 @@ const App = () => {
                 className="text-white"
                 href="https://github.com/mohammad6vakili/Weather"
               >
-                <li className="menu-item">Git</li>
+                <li className="menu-item">Source</li>
               </a>
 
               <Link to="/signup">
                 <li className="menu-item">Create account</li>
               </Link>
 
+                {currentUser && 
+              <Fade left>
+                <Link to="/login">
+                  <li onClick={logout} className="menu-item text-danger">Log Out</li>
+                </Link>                
+              </Fade>
+                }
 
               <button onClick={closeMenu} className="menu-close-button">
                 <i className="fa fa-chevron-left"></i>
@@ -76,6 +89,7 @@ const App = () => {
           <PrivateRoute path="/watchlist" component={Watchlist} />
           <Route path="/signup" component={Signup}/>
           <Route path="/login" component={Login}/>
+          <Route path="/forgot-password" component={ForgotPassword}/>
         </Switch>
 
 

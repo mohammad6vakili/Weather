@@ -1,8 +1,8 @@
 import React,{useRef , useState , useContext} from 'react';
 import {Form, Button} from 'react-bootstrap';
-import {useAuth} from '../Contexts/AuthContext';
+import {AuthContext} from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
-import {Link, Redirect , useHistory} from 'react-router-dom';
+import {Link , useHistory} from 'react-router-dom';
 import {message} from 'antd';
 import swal from 'sweetalert';
 
@@ -12,8 +12,7 @@ const Signup = () =>{
 const emailRef = useRef();
 const passwordRef = useRef();
 const passwordConfirmRef = useRef();
-const {signup} = useAuth();
-const [error , setError]=useState("");
+const {signup , error , setError} = useContext(AuthContext);
 const [loading , setLoading]=useState(false);
 let history = useHistory();
 

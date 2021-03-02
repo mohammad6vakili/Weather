@@ -23,6 +23,7 @@ const Watchlist=()=>{
             watchlistData = 
             <Zoom>
             <div className='watchlist-wrapper'>
+                
                 {showWatchList && showWatchList.map((city)=>(
                             <div key={uuidv4()} className='watch-city-box mb-3'>
                             <div className="city-info">

@@ -20,10 +20,10 @@ const City=()=>{
     }=useContext(AppContext)
 
 
-    let cityData =<Spin tip='Loading...' size='large'/>
+    let cityLoaded =<Spin tip='Loading...' size='large'/>
 
     if(city){
-        cityData =
+        cityLoaded =
         <div className='city-wrapper'>
         <Zoom clear>
           <div className='city-box'>
@@ -81,7 +81,7 @@ const City=()=>{
 
     return(
         <React.Fragment>
-                {cityData}
+                {cityLoaded}
         </React.Fragment>
     )
 }

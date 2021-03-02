@@ -26,6 +26,7 @@ export const AppProvider = (props) => {
 
 //----------------------------------------------Component Did Mount----------------------------------
   useEffect(() => {
+    console.log(watchlist);
     getTime();
     getDate();
   }, [])
@@ -140,10 +141,10 @@ export const AppProvider = (props) => {
 //-------------------------------------------add city to Watchlist-----------------------------------
   const addToWatch = (city) => {
     message.success("Added to Watchlist");
+    watchlist.push({name:city.name , id:city.id});
     setWatchlist(Array.from(new Set(watchlist.map(a => a.id)))
     .map(id => {
     return watchlist.find(a => a.id === id)}));
-    watchlist.push({name:city.name , id:city.id});
     localStorage.setItem('watchlist',JSON.stringify(watchlist));
     console.log(watchlist);
   };

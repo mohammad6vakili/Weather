@@ -6,11 +6,10 @@ import {Link , useHistory} from 'react-router-dom';
 import Swal from 'sweetalert';
 import {message} from "antd";
 
-const Login = () =>{
+const ForgotPassword = () =>{
 
 const emailRef = useRef();
-const passwordRef = useRef();
-const {login , error , setError , setIsLogged} = useContext(AuthContext);
+const { resetPassword, error ,setError} = useContext(AuthContext);
 const [loading , setLoading]=useState(false);
 const history = useHistory();
 
@@ -20,12 +19,15 @@ const handleSubmit= async (e) => {
     try{
     setError("");
     setLoading(true);
-    await login(emailRef.current.value , passwordRef.current.value);
-    setIsLogged(true);
-    history.push('/');
+    await resetPassword(emailRef.current.value);
+    Swal({
+        title: "Successful!",
+        text: "Reset password link was sent to your email.",
+        icon: "success",
+        button: history.push('/login'),
+      });
     }catch{
-        setError("Falied to log in");
-        setIsLogged(false);
+        setError("Falied to reset your password");
     }
     setLoading(false);
 }
@@ -35,23 +37,14 @@ const handleSubmit= async (e) => {
     <div className='forms-wrapper'>
         <Fade>
         <div className='forms'>
-            <h2 className='text-center mt-2 mb-4'>Log In</h2>
+            <h2 className='text-center mt-2 mb-4'>Reset your password</h2>
             {error && message.error(error)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
-                <Form.Group id="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" ref={passwordRef} required />
-                </Form.Group>
-                <Button disabled={loading} type="submit" className="w-100 mt-4">Log In</Button>
-                <div className='text-center mt-3'>
-                    <Link  to="/forgot-password">
-                        Forgot your password?
-                    </Link>
-                </div>
+                <Button  disabled={loading} type="submit" className="w-100 mt-4">Reset Password</Button>
             </Form>
         </div>
         <div className='w-100 text-center text-white mt-3'>Need an account? 
@@ -62,4 +55,4 @@ const handleSubmit= async (e) => {
 
     )
 }
-export default Login;
+export default ForgotPassword;

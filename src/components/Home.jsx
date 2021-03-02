@@ -3,10 +3,11 @@ import Fade from "react-reveal";
 import Zoom from "react-reveal";
 import City from "./City";
 import { AppContext } from "../Contexts/AppContext";
-import { useAuth } from "../Contexts/AuthContext";
-import {useHistory} from 'react-router-dom';
+import { AuthContext } from "../Contexts/AuthContext";
+import {useHistory , Link} from 'react-router-dom';
 import Modal from "react-modal";
 import Avatar from '../Assets/images/Male-avatar.png';
+
 
 
 
@@ -17,20 +18,20 @@ const Home = () => {
     query,
     getQuery,
     profileModal,
-    openProfileModal,
     closeProfileModal,
-    setProfileModal
+    setProfileModal,
 
 } = useContext(AppContext);
 
-const {currentUser , logout} = useAuth();
+const {currentUser, setError , logout} = useContext(AuthContext);
 const history = useHistory();
 
 const handleLogout = async () =>{
-    await logout()
-    history.push('/login')
+    await logout();
+    history.push('/login');
     setProfileModal(false);
 }
+
 
   return (
     <div className="weather-wrapper mb-5">
@@ -94,7 +95,8 @@ const handleLogout = async () =>{
         <Modal className="profile-modal" isOpen={true} onRequestClose={closeProfileModal}>
           <div className="w-100 d-flex flex-column align-items-center justify-content-around h-100">
             <img className='avatar-image' src={Avatar} alt="avatar"/>
-            <h3 className="w-100 text-center">{currentUser.email}</h3>
+            <h4 className="w-100 text-center">{currentUser.email}</h4>
+            <Link className='w-100' to="/forgot-password"><button className='btn btn-outline-dark w-100'>Reset Password</button></Link>
             <button onClick={handleLogout} className="btn btn-outline-danger w-100">Log Out</button>
           </div>
         </Modal>
