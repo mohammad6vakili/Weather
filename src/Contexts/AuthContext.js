@@ -31,7 +31,7 @@ export const AuthProvider = (props) =>{
 
     const logout = () => {
         auth.signOut();
-        setIsLogged(false)
+        setIsLogged(false);
     }
 
     const resetPassword=(email)=>{

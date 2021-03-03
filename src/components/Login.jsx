@@ -1,34 +1,36 @@
-import React,{useRef , useState , useContext} from 'react';
+import React,{useRef , useState , useContext ,useEffect} from 'react';
 import {Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
-import {Link , useHistory} from 'react-router-dom';
-import Swal from 'sweetalert';
+import {Link , Redirect, useHistory} from 'react-router-dom';
 import {message} from "antd";
 
 const Login = () =>{
 
 const emailRef = useRef();
 const passwordRef = useRef();
-const {login , error , setError , setIsLogged} = useContext(AuthContext);
+const {login , error , setError ,isLogged , setIsLogged , currentUser } = useContext(AuthContext);
 const [loading , setLoading]=useState(false);
 const history = useHistory();
 
 
-const handleSubmit= async (e) => {
-    e.preventDefault();
-    try{
-    setError("");
-    setLoading(true);
-    await login(emailRef.current.value , passwordRef.current.value);
-    setIsLogged(true);
-    history.push('/');
-    }catch{
-        setError("Falied to log in");
-        setIsLogged(false);
+    const handleSubmit=async(e)=> {
+    e.preventDefault()
+
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      setIsLogged(true);
+      history.push("/");
+    } catch {
+      setError("Failed to log in");
+      setIsLogged(false);
     }
     setLoading(false);
 }
+    
+ 
 
     return(
 

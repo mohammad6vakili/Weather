@@ -125,6 +125,13 @@
   font-size: 28px;
   cursor: pointer;
   padding-right: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  font-size: 20px;
+  font-weight: 900;
 }
 #menu-button {
   padding-left: 70px;
@@ -451,7 +458,7 @@
   animation-name: cloud;
   animation-duration: 4s;
   animation-iteration-count: infinite;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 @keyframes cloud {
   0% {
@@ -550,6 +557,25 @@
     top: 200%;
   }
 }
+.userLoc-weather-btn{
+  z-index: 1;
+  width:250px;
+  height: 50px;
+  background-color: rgba(245, 245, 245, 0.603);
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: #202020;
+  cursor: pointer;
+  margin-top: 15px;
+}
+.userLoc-weather-btn:hover{
+  background-color: rgba(245, 245, 245, 0.877);
+
+}
 /* -----------------------------------------Watchlist---------------------------------------------- */
 .watchlist-wrapper {
   width: 100%;
@@ -589,6 +615,7 @@
 .ReactModal__Overlay,
 .ReactModal__Overlay--after-open {
   background-color: rgba(0, 0, 0, 0.76) !important;
+  z-index: 1000;
 }
 .profile-modal{
   width: 40% !important;

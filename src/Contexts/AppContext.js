@@ -2,6 +2,7 @@ import React, { useState,useEffect ,createContext } from "react";
 import { message } from "antd";
 import axios from "axios";
 import Swal from 'sweetalert';
+import { useLocation } from "react-router";
 
 export const AppContext = createContext();
 
@@ -26,10 +27,26 @@ export const AppProvider = (props) => {
 
 //----------------------------------------------Component Did Mount----------------------------------
   useEffect(() => {
-    console.log(watchlist);
     getTime();
     getDate();
   }, [])
+
+
+//-----------------------------------------------get user location-----------------------------------
+const accessUserLocation=async()=>{
+  await navigator.geolocation.getCurrentPosition((position)=>{
+    axios.get(`https:api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`)
+    .then(res=>setQuery(res.data.city))
+    .then(
+       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`)
+      .then(function (response){
+        setCity(response.data);
+        setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
+      }),
+      setQueryActive(true)
+    )
+  })
+}
 
 
 //------------------------------------------------get city data--------------------------------------
@@ -216,7 +233,8 @@ export const AppProvider = (props) => {
     profileModal,
     openProfileModal,
     closeProfileModal,
-    setProfileModal
+    setProfileModal,
+    accessUserLocation
   };
 
 
