@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Yekan;
+  scrollbar-width: none;
 }
 @font-face {
   font-family: Yekan;
@@ -15,18 +16,17 @@
   position: relative;
   overflow-y: auto;
   min-height: 100vh;
-  background: rgb(2, 0, 36);
+  background: rgb(15, 31, 80);
   background: linear-gradient(
     135deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(11, 48, 83, 1) 0%,
-    rgba(20, 64, 75, 1) 15%,
-    rgba(23, 70, 88, 1) 30%,
-    rgba(24, 81, 102, 1) 45%,
-    rgba(42, 88, 121, 1) 60%,
-    rgba(43, 78, 116, 1) 75%,
-    rgba(50, 89, 135, 1) 90%,
-    rgba(38, 73, 111, 1) 100%
+    rgba(15, 31, 80, 1) 0%,
+    rgba(27, 64, 106, 1) 15%,
+    rgba(42, 97, 120, 1) 30%,
+    rgba(44, 111, 161, 1) 45%,
+    rgba(55, 135, 199, 1) 60%,
+    rgba(85, 153, 223, 1) 75%,
+    rgba(68, 155, 210, 1) 90%,
+    rgba(70, 156, 177, 1) 100%
   );
 }
 /*--------------------------------------------navigation and menu------------------------------------- */
@@ -44,7 +44,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 20%;
+  width: 25%;
   height: 100vh;
   background-color: rgba(75, 75, 75, 0.534);
   z-index: 1000;
@@ -53,6 +53,7 @@
   justify-content: flex-start;
   padding: 20px 0px 0px 8px;
   box-shadow: 3px 5px 10px rgba(114, 114, 114, 0.5);
+  overflow-y: scroll;
 }
 .menu-closed {
   display: none;
@@ -99,26 +100,29 @@
   top: 10px;
   background: none;
   border: none;
+  cursor: pointer;
 }
 .search-btn i {
-  font-size: 24px;
+  font-size: 28px;
   color: rgb(10, 85, 146);
 }
-.history{
-  position: fixed;
-  width: 100%;
-  top: 55px;
-  border: 1px solid red;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.search-btn i:hover {
+  color: rgb(30, 130, 212);
 }
-.history-item{
-  width: 90%;
-  height: 40px;
-  border: 1px solid red;
-  background-color: whitesmoke;
+.userLoc-weather-btn {
+  position: absolute;
+  right: 90px;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.userLoc-weather-btn i {
+  font-size: 30px;
+  color: rgb(10, 85, 146);
+}
+.userLoc-weather-btn i:hover {
+  color: rgb(30, 130, 212);
 }
 .logo {
   color: white;
@@ -143,12 +147,12 @@
 .menu-close-button {
   position: absolute;
   top: 1%;
-  right: -30px;
-  z-index: 10001;
+  right: 0px;
+  z-index: 1001;
   width: 30px;
   font-size: 20px;
   height: 70px;
-  border-radius: 0px 8px 8px 0px;
+  border-radius: 8px 0px 0px 8px;
   background: none;
   border: none;
   color: rgb(255, 255, 255);
@@ -196,6 +200,10 @@
 
 .city-weather {
   width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .city-info {
   display: flex;
@@ -208,6 +216,13 @@
   font-weight: 900;
   color: rgba(19, 18, 32, 0.774);
 }
+.city-temp {
+  font-size: 38px;
+}
+.city-weather-option {
+  font-size: 20px;
+  font-weight: 900;
+}
 .city-weather div {
   width: 100%;
   padding: 10px 5px 0px 0px;
@@ -216,13 +231,13 @@
 }
 /* ----------------------------------------------forecast----------------------------------------- */
 .forecast-btns {
-  width: 30%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 30px;
 }
 .forecast-btn {
-  width: 150px;
+  width: 30%;
   height: 60px;
   background-color: rgb(236, 236, 236);
   box-shadow: 1px 1px 5px rgb(165, 165, 165);
@@ -300,7 +315,11 @@
   align-items: center;
   justify-content: center;
 }
-
+.time-item-span {
+  font-size: 22px;
+  font-weight: 900;
+  color: slategrey;
+}
 .forecast-container {
   width: 90%;
 }
@@ -340,7 +359,7 @@
   margin-bottom: 50px;
 }
 .daily-forecast-time-item {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   display: flex;
   align-items: center;
@@ -394,25 +413,25 @@
 .daily-forecast-detail-item-right div {
   width: 100%;
   display: flex;
-  padding:5px 20px;
+  padding: 5px 20px;
 }
-.daily-forecast-detail-item-right-des{
+.daily-forecast-detail-item-right-des {
   justify-content: center;
   align-items: center;
 }
-.daily-forecast-detail-item-right-des span{
+.daily-forecast-detail-item-right-des span {
   font-size: 22px;
   font-weight: 900;
 }
 .daily-forecast-detail-item-right-wind,
 .daily-forecast-detail-item-right-humidity,
-.daily-forecast-detail-item-right-pressure{
+.daily-forecast-detail-item-right-pressure {
   justify-content: space-between;
   font-size: 18px;
   font-weight: 900;
   border-bottom: 1px solid rgba(185, 115, 115, 0.596);
 }
-.daily-forecast-detail-item-right-feelsLike{
+.daily-forecast-detail-item-right-feelsLike {
   justify-content: space-between;
   font-size: 18px;
   font-weight: 900;
@@ -472,13 +491,13 @@
   }
 }
 .home-anim {
-  width: 20%;
+  width: 260px;
   display: flex;
   justify-content: center;
   position: relative;
 }
 .fa-tint {
-  color: rgb(46, 111, 207);
+  color: rgb(27, 78, 155);
   font-size: 26px;
   position: absolute;
   animation-name: rain;
@@ -557,25 +576,6 @@
     top: 200%;
   }
 }
-.userLoc-weather-btn{
-  z-index: 1;
-  width:250px;
-  height: 50px;
-  background-color: rgba(245, 245, 245, 0.603);
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 800;
-  color: #202020;
-  cursor: pointer;
-  margin-top: 15px;
-}
-.userLoc-weather-btn:hover{
-  background-color: rgba(245, 245, 245, 0.877);
-
-}
 /* -----------------------------------------Watchlist---------------------------------------------- */
 .watchlist-wrapper {
   width: 100%;
@@ -597,19 +597,19 @@
   padding: 20px 10px 30px 10px;
 }
 /* ------------------------------------------forms------------------------------------------------ */
-.forms-wrapper{
+.forms-wrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.forms{
+.forms {
   width: 30%;
   border: 1px solid white;
   background-color: whitesmoke;
   border-radius: 5px;
-  padding:15px 10px;
+  padding: 15px 10px;
   min-width: 300px;
 }
 .ReactModal__Overlay,
@@ -617,7 +617,7 @@
   background-color: rgba(0, 0, 0, 0.76) !important;
   z-index: 1000;
 }
-.profile-modal{
+.profile-modal {
   width: 40% !important;
   height: 500px !important;
   background-color: whitesmoke !important;
@@ -628,9 +628,152 @@
   border: 1px solid black !important;
 }
 /* -----------------------------------------------------profile-------------------------------------- */
-.avatar-image{
+.avatar-image {
   width: 200px;
   border: 1px solid rgba(124, 124, 124, 0.308);
   border-radius: 50%;
   box-shadow: 2px 2px 10px rgba(201, 201, 201, 0.521);
+}
+/* ------------------------------------------------media queries------------------------------------- */
+@media only screen and (max-width:1030px){
+  .daily-wrapper {
+    width: 90%;
+  }
+  .daily-forecast-time-item {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 830px) {
+  .logo {
+    display: none;
+  }
+  .search-form {
+    width: 70%;
+    right: 20px;
+  }
+  .menu-open {
+    width: 30%;
+  }
+  .menu-close-button {
+    right: 0px;
+  }
+  .city-box {
+    width: 80%;
+  }
+  .forecast-btn {
+    width: 39.5%;
+  }
+  .forecast-wrapper {
+    width: 90%;
+  }
+  .hourly-item-des img{
+    width: 30px;
+    }
+    .daily-wrapper {
+      width: 96%;
+    }
+}
+@media only screen and (max-width: 600px) {
+  #menu-button {
+    padding-left: 20px;
+  }
+  .search-form {
+    width: 80%;
+  }
+  .search-btn i {
+    font-size: 22px;
+  }
+  .userLoc-weather-btn i {
+    font-size: 22px;
+  }
+  .menu-open {
+    width: 40%;
+    background-color: rgba(75, 75, 75, 0.747);
+  }
+  .city-box {
+    width: 90%;
+  }
+  .city-weather div {
+    padding: 12px 0px;
+  }
+  .city-weather-option {
+    font-size: 18px;
+  }
+  .forecast-btn {
+    width: 44%;
+    font-size: 17px;
+  }
+  .forecast-item {
+    justify-content: space-around;
+  }
+  .forecast-item div {
+    width: 33%;
+  }
+  .hourly-item-des{
+    font-size: 12px;
+    }
+  .hourly-humidity {
+    display: none !important;
+  }
+  .forecast-title {
+    font-size: 18px;
+  }
+  .forecast-wrapper {
+    padding: 0px 5px;
+    width: 94%;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .search-btn {
+    right: 30px;
+  }
+  .userLoc-weather-btn {
+    right: 60px;
+  }
+  .search-form {
+    right: 0px;
+    width: 85%;
+  }
+  #menu-button {
+    padding-left: 10px;
+  }
+  .menu-open {
+    width: 50%;
+    background-color: rgba(75, 75, 75, 0.836);
+  }
+  .city-name {
+    font-size: 20px;
+  }
+  .city-temp {
+    font-size: 24px;
+  }
+  .time-item-span {
+    font-size: 16px;
+  }
+  .forecast-title {
+    font-size: 16px;
+  }
+  .hourly-item-des {
+    font-size: 10px;
+  }
+  .hourly-item-des img{
+    width: 25px;
+    }
+}
+@media only screen and (max-width: 330px) {
+  .search-btn {
+    right: 20px;
+  }
+  .userLoc-weather-btn {
+    right: 50px;
+  }
+  .menu-open {
+    width: 55%;
+  }
+  .hourly-item-des{
+    font-size: 9px;
+  }
+  .hourly-item-des img{
+    width: 20px;
+    }
 }

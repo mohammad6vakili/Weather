@@ -29,16 +29,16 @@ const City=()=>{
           <div className='city-box'>
               <div className="city-info">
                   <div className='d-flex'>
-                      <div className='d-flex flex-column w-50 text-center'>
+                      <div className='d-flex flex-column w-75 text-center'>
                           <span className='city-name mr-3'>{city.name}</span>
-                          <span style={{fontSize:38+'px'}} className='m-0'>{Math.floor(city.main.temp - 273.15)+'°'}<strong style={{fontSize:18+'px'}}>C</strong></span>
+                          <span className='city-temp m-0'>{Math.floor(city.main.temp - 273.15)+'°'}<strong style={{fontSize:18+'px'}}>C</strong></span>
                       </div>
-                      <div className='text-center pl-4' style={{width:30+'%'}}>
+                      <div className='text-left d-flex flex-column' style={{width:30+'%'}}>
                           {city.weather.map((weather)=>(
-                          <img key={weather.id} className='w-100' src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt='weather icon'/>
+                          <img key={weather.id} className='w-50' src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt='weather icon'/>
                           ))}
                           {city.weather.map((weather)=>(
-                          <small key={weather.id}>{weather.main}</small>
+                          <span style={{fontSize:'16px'}} key={weather.id}>{weather.main}</span>
                           ))}                        
                       </div>
                       
@@ -55,10 +55,10 @@ const City=()=>{
                   </Popconfirm>
               </div>
               <div className="city-weather">
-                  <div className='border-bottom border-secondary'><h5>Wind</h5><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>
-                  <div className='border-bottom border-secondary'><h5>Humidity</h5><span>{Math.floor(city.main.humidity)}{" "} %</span></div>
-                  <div className='border-bottom border-secondary'><h5>Pressure</h5><span>{Math.floor(city.main.pressure)}{" "} M</span></div>
-                  <div><h5>Feels like</h5><span style={{fontSize:16+'px'}}>{Math.floor(city.main.feels_like - 273.15)+'°'}<strong style={{fontSize:12+'px'}}>C</strong></span></div>
+                  <div className='border-bottom border-secondary'><span className='city-weather-option'>Wind</span><span>{Math.floor(city.wind.speed)}{" "} km/h</span></div>
+                  <div className='border-bottom border-secondary'><span className='city-weather-option'>Humidity</span><span>{Math.floor(city.main.humidity)}{" "} %</span></div>
+                  <div className='border-bottom border-secondary'><span className='city-weather-option'>Pressure</span><span>{Math.floor(city.main.pressure)}{" "} M</span></div>
+                  <div><span className='city-weather-option'>Feels like</span><span style={{fontSize:16+'px'}}>{Math.floor(city.main.feels_like - 273.15)+'°'}<strong style={{fontSize:12+'px'}}>C</strong></span></div>
               </div>
           </div>
          </Zoom>

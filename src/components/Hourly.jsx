@@ -27,15 +27,15 @@ const Hourly =()=>{
                 <div>
                     <span>{Math.floor(item.temp - 273.15)+'°'}<strong style={{fontSize:16+'px'}}>C</strong></span>
                 </div>
-                <div>
+                <div className='hourly-item-des'>
                     <span>{item.weather[0].description}
-                        <img style={{width:30+'px'}} src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
+                        <img src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
                     </span>
                 </div>
                 <div>
                     <span>{Math.floor(item.wind_speed)}{" "} km/h</span>    
                 </div>
-                <div>
+                <div className="hourly-humidity">
                     <span>{item.humidity} {" "} %</span>
                 </div>
             </div>
@@ -55,7 +55,7 @@ const Hourly =()=>{
                                 <i style={{fontSize:36+'px'}} className="fa fa-clock-o"></i>
                             </div>
                             {time.map((item)=>(
-                                <div className='time-item text-secondary ' key={uuidv4()}><span style={{fontSize:22+'px',fontWeight:900,color:'slategrey'}}>{item}</span></div>
+                                <div className='time-item text-secondary ' key={uuidv4()}><span className='time-item-span'>{item}</span></div>
                             ))}
                         </div>
                         <div className='forecast-container'>
@@ -72,7 +72,7 @@ const Hourly =()=>{
                                     <span className='forecast-title'>Wind</span>
                                     <img style={{width:30+'px'}} src={WindImage} alt="wind image"/>
                                 </div>
-                                <div>
+                                <div className="hourly-humidity">
                                     <span className='forecast-title'>Humidity</span>
                                     <img style={{width:30+'px'}} src={Humidity} alt="humidity"/>
                                 </div>

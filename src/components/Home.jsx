@@ -3,7 +3,8 @@ import Fade from "react-reveal";
 import Zoom from "react-reveal";
 import City from "./City";
 import { AppContext } from "../Contexts/AppContext";
-
+import {Spin} from "antd";
+import {AuthContext} from "../Contexts/AuthContext";
 
 
 const Home = () => {
@@ -16,8 +17,13 @@ const Home = () => {
     accessUserLocation
 } = useContext(AppContext);
 
+  const {
+    currentUser
+  }=useContext(AuthContext)
 
-  return (
+  let homeLoaded = <Spin tip='Loading...' size='large'/>
+  if(currentUser){
+    homeLoaded = 
     <div className="weather-wrapper mb-5">
       
        {queryActive ? 
@@ -59,13 +65,10 @@ const Home = () => {
               </div>
             </div>
           </Fade>
-          <div onClick={accessUserLocation} className='userLoc-weather-btn'>
-            Current Location Weather
-          </div>
         </div>
        }
       <Fade top>
-        <form className="search-form" onSubmit={getData} autoComplete="on">
+        <form className="search-form" onSubmit={getData} autoComplete="off">
           <input
             className="search-box form-control"
             value={query}
@@ -76,9 +79,19 @@ const Home = () => {
           <button type="submit" className="search-btn">
             <i className="fa fa-search" />
           </button>
+          <div data-toggle="tooltip" title="Your Location" data-placement="top" onClick={accessUserLocation} className='userLoc-weather-btn'>
+            <i className="fa fa-map-marker"></i>
+          </div>
         </form>
       </Fade>
     </div>
+  }
+
+
+  return (
+    <React.Fragment>
+      {homeLoaded}
+    </React.Fragment>
   );
 };
 export default Home;

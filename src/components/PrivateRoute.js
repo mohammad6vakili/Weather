@@ -10,7 +10,7 @@ const PrivateRoute = ({component:Component , ...rest}) =>{
         <Route
             {...rest}
             render={props=>{
-                return currentUser  ? <Component {...props}/> : !isLogged && <Redirect to="/login"/>      
+                return currentUser  ? <Component {...props}/> : !isLogged &&  <Redirect to="/login"/>
             }}
         >
         </Route>

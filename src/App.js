@@ -13,6 +13,7 @@ import { AuthContext } from "./Contexts/AuthContext";
 import Avatar from './Assets/images/Male-avatar.png';
 import Modal from 'react-modal';
 import ForgotPassword from "./components/ForgotPassword";
+import Zoom from 'react-reveal';
 
 
 const App = () => {
@@ -53,12 +54,30 @@ const App = () => {
                 <li className="menu-item">WatchList</li>
               </Link>
 
-              <a
+              {currentUser &&
+                <Fade left>
+                <Link to='/'
+                  onClick={accessUserLocation}
+                >
+                  <li className="menu-item">Current Location</li>
+                </Link>
+                </Fade>
+              }
+
+              {currentUser &&
+              <Fade left>
+                <a
                 className="text-white"
-                onClick={accessUserLocation}
-              >
-                <li className="menu-item">Current Location</li>
-              </a>
+                onClick={currentUser && openProfileModal}
+                >
+                  <li className="menu-item">Profile</li>
+                </a>     
+              </Fade>         
+              }
+
+              <Link to="/signup">
+                <li className="menu-item">Create account</li>
+              </Link>
 
               <a
                 className="text-white"
@@ -66,10 +85,6 @@ const App = () => {
               >
                 <li className="menu-item">Source</li>
               </a>
-
-              <Link to="/signup">
-                <li className="menu-item">Create account</li>
-              </Link>
 
                 {currentUser && 
                   <Fade left>
@@ -115,7 +130,7 @@ const App = () => {
 
         {profileModal && currentUser && 
         <Modal className="profile-modal" isOpen={true} onRequestClose={closeProfileModal}>
-        <Fade>
+        <Zoom top>
           <div className="w-100 d-flex flex-column align-items-center justify-content-around h-100">
             <div className='w-100 pr-4 d-flex justify-content-end'>
               <button className='btn btn-danger btn-md pt-2' onClick={closeProfileModal}>X</button>
@@ -125,7 +140,7 @@ const App = () => {
             <Link onClick={()=>{setProfileModal(false)}} className='w-100' to="/forgot-password"><button className='btn btn-outline-dark w-100'>Reset Password</button></Link>
             <button onClick={handleLogout} className="btn btn-outline-danger w-100">Log Out</button>
           </div>
-        </Fade>
+        </Zoom>
         </Modal>
         }
       </div>

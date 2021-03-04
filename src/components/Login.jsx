@@ -1,33 +1,42 @@
-import React,{useRef , useState , useContext ,useEffect} from 'react';
+import React,{useRef , useState , useContext , useEffect } from 'react';
 import {Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
-import {Link , Redirect, useHistory} from 'react-router-dom';
+import {Link , useHistory} from 'react-router-dom';
 import {message} from "antd";
 
 const Login = () =>{
 
-const emailRef = useRef();
-const passwordRef = useRef();
-const {login , error , setError ,isLogged , setIsLogged , currentUser } = useContext(AuthContext);
-const [loading , setLoading]=useState(false);
-const history = useHistory();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const [loading , setLoading]=useState(false);
+    const history = useHistory();
+    const {
+        login,
+        error,
+        setError,
+        setIsLogged,
+        isLogged,
+        currentUser
+            } = useContext(AuthContext);
 
+    useEffect(() => {
+        if(isLogged){
+            history.push("/");    
+        }
+    }, [currentUser]);
 
     const handleSubmit=async(e)=> {
-    e.preventDefault()
-
+    e.preventDefault();
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       setIsLogged(true);
-      history.push("/");
     } catch {
-      setError("Failed to log in");
       setIsLogged(false);
     }
-    setLoading(false);
+      setLoading(false);       
 }
     
  
@@ -38,7 +47,6 @@ const history = useHistory();
         <Fade>
         <div className='forms'>
             <h2 className='text-center mt-2 mb-4'>Log In</h2>
-            {error && message.error(error)}
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
