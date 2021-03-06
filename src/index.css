@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  max-width: 1500px;
   overflow-y: auto;
   min-height: 100vh;
   background: rgb(15, 31, 80);
@@ -46,7 +47,7 @@
   left: 0;
   width: 25%;
   height: 100vh;
-  background-color: rgba(75, 75, 75, 0.534);
+  background-color: rgba(75, 75, 75, 0.918);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -103,7 +104,7 @@
   cursor: pointer;
 }
 .search-btn i {
-  font-size: 28px;
+  font-size: 22px;
   color: rgb(10, 85, 146);
 }
 .search-btn i:hover {
@@ -118,7 +119,7 @@
   cursor: pointer;
 }
 .userLoc-weather-btn i {
-  font-size: 30px;
+  font-size: 24px;
   color: rgb(10, 85, 146);
 }
 .userLoc-weather-btn i:hover {
@@ -423,6 +424,9 @@
   font-size: 22px;
   font-weight: 900;
 }
+.daily-forecast-detail-item-right-des img{
+  width: 50px;
+}
 .daily-forecast-detail-item-right-wind,
 .daily-forecast-detail-item-right-humidity,
 .daily-forecast-detail-item-right-pressure {
@@ -586,7 +590,7 @@
   align-items: center;
 }
 .watch-city-box {
-  width: 40%;
+  width: 48%;
   min-width: 300px;
   background-color: white;
   border: none;
@@ -617,6 +621,13 @@
   background-color: rgba(0, 0, 0, 0.76) !important;
   z-index: 1000;
 }
+/* -----------------------------------------------------profile-------------------------------------- */
+.avatar-image {
+  width: 200px;
+  border: 1px solid rgba(124, 124, 124, 0.308);
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px rgba(201, 201, 201, 0.521);
+}
 .profile-modal {
   width: 40% !important;
   height: 500px !important;
@@ -627,20 +638,21 @@
   margin-top: 7% !important;
   border: 1px solid black !important;
 }
-/* -----------------------------------------------------profile-------------------------------------- */
-.avatar-image {
-  width: 200px;
-  border: 1px solid rgba(124, 124, 124, 0.308);
-  border-radius: 50%;
-  box-shadow: 2px 2px 10px rgba(201, 201, 201, 0.521);
+.profile-modal{
+  font-size: 22px;
 }
 /* ------------------------------------------------media queries------------------------------------- */
-@media only screen and (max-width:1030px){
+@media only screen and (max-width: 1030px) {
   .daily-wrapper {
     width: 90%;
   }
   .daily-forecast-time-item {
     font-size: 22px;
+  }
+}
+@media only screen and (max-width:880px){
+  .daily-wrapper {
+    width: 96%;
   }
 }
 @media only screen and (max-width: 830px) {
@@ -666,12 +678,39 @@
   .forecast-wrapper {
     width: 90%;
   }
-  .hourly-item-des img{
+  .hourly-item-des img {
     width: 30px;
-    }
-    .daily-wrapper {
-      width: 96%;
-    }
+  }
+  .daily-wrapper {
+    width: 96%;
+  }
+  .profile-modal{
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width:720px){
+  .daily-forecast-detail-item-left-DayNight{
+    font-size: 22px;
+  }
+  .daily-forecast-detail-item-left-MinMax div {
+    font-size: 18px;
+  }
+  .daily-forecast-time-item{
+    font-size: 17px;
+  }
+  .daily-wrapper{
+    width: 100%;
+  }
+  .forecast-wrapper{
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+  .daily-forecast-detail-item-right-des span{
+    font-size: 18px !important;
+  }
+  .daily-forecast-detail-item-right-des img{
+    width: 40px;
+  }
 }
 @media only screen and (max-width: 600px) {
   #menu-button {
@@ -709,9 +748,9 @@
   .forecast-item div {
     width: 33%;
   }
-  .hourly-item-des{
+  .hourly-item-des {
     font-size: 12px;
-    }
+  }
   .hourly-humidity {
     display: none !important;
   }
@@ -721,6 +760,44 @@
   .forecast-wrapper {
     padding: 0px 5px;
     width: 94%;
+  }
+  .daily-forecast-detail-item-right div{
+    font-size: 15px !important;
+    padding: 8px 0px;
+  }
+  .daily-forecast-detail-item-left-DayNight{
+    font-size: 18px;
+  }
+  .daily-forecast-detail-item-left-MinMax div {
+    font-size: 15px;
+  }
+  .profile-modal{
+    font-size: 15px;
+  }
+}
+@media only screen and (max-width:500px){
+  .daily-forecast-detail-item-right-des span{
+    font-size: 16px !important;
+  }
+  .daily-forecast-detail-item-right-des img{
+    width: 30px;
+  }
+  .daily-forecast-detail-item-right div{
+    font-size: 13px !important;
+    padding: 12px 0px;
+  }
+  .daily-forecast-detail-item-left-DayNight{
+    font-size: 14px;
+  }
+  .daily-forecast-detail-item-left-MinMax div {
+    font-size: 13px;
+  }
+  .daily-forecast-time-item{
+    font-size: 12px;
+  }
+  .profile-modal {
+    width: 70% !important;
+    margin-left: 18% !important;
   }
 }
 @media only screen and (max-width: 450px) {
@@ -756,9 +833,29 @@
   .hourly-item-des {
     font-size: 10px;
   }
-  .hourly-item-des img{
+  .hourly-item-des img {
     width: 25px;
-    }
+  }
+  .daily-forecast-detail-item-right-des span{
+    font-size: 14px !important;
+  }
+  .daily-forecast-detail-item-right-des img{
+    width:25xpx;
+  }
+}
+@media only screen and (max-width:400px){
+  .daily-forecast-detail-item-left-DayNight{
+    font-size: 12px;
+  }
+  .fa-moon-o{
+    font-size: 18px !important;
+  }
+  .fa-sun-o{
+    font-size: 18px !important;
+  }
+  .daily-forecast-detail-item-left-MinMax div {
+    font-size: 10px;
+  }
 }
 @media only screen and (max-width: 330px) {
   .search-btn {
@@ -770,10 +867,10 @@
   .menu-open {
     width: 55%;
   }
-  .hourly-item-des{
+  .hourly-item-des {
     font-size: 9px;
   }
-  .hourly-item-des img{
+  .hourly-item-des img {
     width: 20px;
-    }
+  }
 }

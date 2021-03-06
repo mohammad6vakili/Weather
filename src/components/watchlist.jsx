@@ -49,7 +49,7 @@ const Watchlist=()=>{
                                     okText="Yes"
                                     cancelText="No"
                                 >
-                                    <button className='btn btn-outline-danger btn-sm'>Remove from Watchlist</button>
+                                    <button className='btn btn-outline-danger btn-sm p-1'>Remove from Watchlist</button>
                                 </Popconfirm>
                             </div>
                             <div className="city-weather">

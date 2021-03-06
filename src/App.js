@@ -14,6 +14,7 @@ import Avatar from './Assets/images/Male-avatar.png';
 import Modal from 'react-modal';
 import ForgotPassword from "./components/ForgotPassword";
 import Zoom from 'react-reveal';
+import {message, Popconfirm} from 'antd';
 
 
 const App = () => {
@@ -46,13 +47,21 @@ const App = () => {
         <div className="navigation">
           <Fade left>
             <ul className={menuOpen ? "menu-open" : "menu-closed"}>
-              <Link to="/">
-                <li className="menu-item">Home</li>
-              </Link>
+              {currentUser &&
+              <Fade left>
+                <Link to="/">
+                  <li className="menu-item">Home</li>
+                </Link>
+              </Fade>
+              }
 
-              <Link to="/watchlist">
-                <li className="menu-item">WatchList</li>
-              </Link>
+              {currentUser &&
+              <Fade left>
+                <Link to="/watchlist">
+                  <li className="menu-item">WatchList</li>
+                </Link>
+              </Fade>
+              }
 
               {currentUser &&
                 <Fade left>
@@ -88,9 +97,16 @@ const App = () => {
 
                 {currentUser && 
                   <Fade left>
+                    <Popconfirm
+                    title="Do you want to Logout?"
+                    onConfirm={handleLogout}
+                    okText="Yes"
+                    cancelText="No"
+                    >                    
                     <Link to="/login">
-                      <li onClick={handleLogout} className="menu-item text-danger">Log Out</li>
+                      <li className="menu-item text-danger">Log Out</li>
                     </Link>                
+                    </Popconfirm>                      
                   </Fade>
                 }
 
@@ -107,7 +123,7 @@ const App = () => {
             >
               <i
                 onClick={openMenu}
-                style={{ fontSize: 50 + "px", paddingTop: 10 + "px" }}
+                style={{ fontSize: 35 + "px", paddingTop: 10 + "px" }}
                 className="fa fa-bars"
               ></i>
             </div>
@@ -136,9 +152,16 @@ const App = () => {
               <button className='btn btn-danger btn-md pt-2' onClick={closeProfileModal}>X</button>
             </div>
             <img className='avatar-image' src={Avatar} alt="avatar"/>
-            <h4 className="w-100 text-center">{currentUser.email}</h4>
+            <p id="profile-modal-email" className="w-100 text-center">{currentUser.email}</p>
             <Link onClick={()=>{setProfileModal(false)}} className='w-100' to="/forgot-password"><button className='btn btn-outline-dark w-100'>Reset Password</button></Link>
-            <button onClick={handleLogout} className="btn btn-outline-danger w-100">Log Out</button>
+            <Popconfirm
+            title="Do you want to Logout?"
+            onConfirm={handleLogout}
+            okText="Yes"
+            cancelText="No"
+            >     
+              <button className="btn btn-outline-danger w-100">Log Out</button>
+            </Popconfirm>
           </div>
         </Zoom>
         </Modal>

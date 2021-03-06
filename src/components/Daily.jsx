@@ -17,7 +17,7 @@ const Daily = () => {
     if(forecast){
       dailyLoaded =
         <React.Fragment>
-                            <div className='daily-forecast-time'>
+                  <div className='daily-forecast-time'>
                   {dateDay && dateDay.map((item)=>(
                     <div key={uuidv4()} className='daily-forecast-time-item'>
                         <span>{item}</span>
@@ -32,11 +32,11 @@ const Daily = () => {
                             <div className='daily-forecast-detail-item-left-MinMax'>
                               <div>
                                 <span>{Math.floor(item.temp.max - 273.15)+'°'}<strong style={{fontSize:16+'px'}}>C</strong></span>
-                                <span><i className="fa fa-arrow-up text-success mr-2"></i>Max</span>
+                                <span><i className="fa fa-arrow-up text-success mr-1"></i>Max</span>
                               </div>
                               <div>
                                 <span>{Math.floor(item.temp.min - 273.15)+'°'}<strong style={{fontSize:16+'px'}}>C</strong></span>
-                                <span><i className="fa fa-arrow-down text-danger mr-2"></i>Min</span>
+                                <span><i className="fa fa-arrow-down text-danger mr-1"></i>Min</span>
                               </div>
                             </div>
                             <div className='daily-forecast-detail-item-left-DayNight'>
@@ -53,7 +53,7 @@ const Daily = () => {
                           <div className='daily-forecast-detail-item-right'>
                               <div className='daily-forecast-detail-item-right-des'>
                                 <span>{item.weather[0].description}</span>
-                                <img style={{width:50+'px'}} src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
+                                <img src={`http://openweathermap.org/img/w/${item.weather[0].icon}.png`} alt='weather icon'/>
                               </div>
                               <div className='daily-forecast-detail-item-right-wind'>
                                 <span>Wind</span>

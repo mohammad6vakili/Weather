@@ -32,22 +32,22 @@ export const AppProvider = (props) => {
 
 
 //-----------------------------------------------get user location-----------------------------------
-const accessUserLocation=async()=>{
-  await navigator.geolocation.getCurrentPosition((position)=>{
-    axios.get(`https:api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`)
-    .then(res=>
-       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&appid=498e14c3edcd5cadea0be9209c066677`)
-      .then(function (response){
-        setCity(response.data);
-        setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
-        setQueryActive(true)
-        setShowForecast(0)
-        setQuery("Your Location")
-      }),
-    )
-  })
-  console.log(query);
-}
+  const accessUserLocation=()=>{
+     navigator.geolocation.getCurrentPosition(async(position)=>{
+      await axios.get(`https:api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`)
+      .then(res=>
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&appid=498e14c3edcd5cadea0be9209c066677`)
+        .then(function (response){
+          setCity(response.data);
+          setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
+          setQueryActive(true);
+          setShowForecast(0);
+          setQuery("Your Location");
+        }),
+      )
+    })
+    console.log(query);
+  }
 
 
 //------------------------------------------------get city data--------------------------------------
