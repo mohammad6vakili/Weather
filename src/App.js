@@ -14,7 +14,7 @@ import Avatar from './Assets/images/Male-avatar.png';
 import Modal from 'react-modal';
 import ForgotPassword from "./components/ForgotPassword";
 import Zoom from 'react-reveal';
-import {message, Popconfirm} from 'antd';
+import {Popconfirm} from 'antd';
 
 
 const App = () => {

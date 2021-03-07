@@ -1,4 +1,4 @@
-import React, { useContext , useEffect } from "react";
+import React, { useContext } from "react";
 import Fade from "react-reveal";
 import Zoom from "react-reveal";
 import City from "./City";

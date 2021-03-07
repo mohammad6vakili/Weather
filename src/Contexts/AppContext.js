@@ -35,34 +35,43 @@ export const AppProvider = (props) => {
   const accessUserLocation=()=>{
      navigator.geolocation.getCurrentPosition(async(position)=>{
       await axios.get(`https:api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`)
-      .then(res=>
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&appid=498e14c3edcd5cadea0be9209c066677`)
-        .then(function (response){
-          setCity(response.data);
-          setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
-          setQueryActive(true);
-          setShowForecast(0);
-          setQuery("Your Location");
-        }),
+      .then(
+        function(res){
+          if(res.status===200){
+            userLocationWeather(res);
+          }else{
+            Swal("Error while reciving data!")
+          }
+        }
       )
     })
-    console.log(query);
   }
 
 
+//-------------------------------------------User Location Weather------------------------------------
+  const userLocationWeather=async(res)=>{
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${res.data.city}&appid=498e14c3edcd5cadea0be9209c066677`)
+    .then(function (response){
+      setCity(response.data);
+      setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
+      setQueryActive(true);
+      setShowForecast(0);
+      setQuery("Your Location");
+    })
+  }  
 //------------------------------------------------get city data--------------------------------------
   const getData = async (e) => {
     e.preventDefault();
     if(query===""){
       Swal('Enter a city name!')
     }else{
-    await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`)
-    .then(function (response){
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=498e14c3edcd5cadea0be9209c066677`)
+    if(response.status===200){
       setCity(response.data);
       setCoord({lat:JSON.stringify(response.data.coord.lat) , lon:JSON.stringify(response.data.coord.lon)});
-    });
-    setQueryActive(true);
-    setShowForecast(0);
+      setQueryActive(true);
+      setShowForecast(0);
+    }
   }}
 
 
@@ -71,7 +80,6 @@ export const AppProvider = (props) => {
     setShowForecast(1);
     const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
     setForecast(response.data);
-    console.log(forecast);
   }
 
 
@@ -80,7 +88,6 @@ export const AppProvider = (props) => {
     setShowForecast(2);
     const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&appid=498e14c3edcd5cadea0be9209c066677`);
     setForecast(response.data);
-    console.log(forecast);
   }
 
 
@@ -164,7 +171,6 @@ export const AppProvider = (props) => {
     .map(id => {
     return watchlist.find(a => a.id === id)}));
     localStorage.setItem('watchlist',JSON.stringify(watchlist));
-    console.log(watchlist);
   };
 
 
@@ -190,7 +196,6 @@ export const AppProvider = (props) => {
     filterWatchName.filter((item)=>(item.id!==city.id))
     )
     localStorage.setItem('watchlist',JSON.stringify(filterWatchName.filter((item)=>(item.id!==city.id))));
-    console.log(watchlist);
   }
 
 

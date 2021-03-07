@@ -1,4 +1,4 @@
-import React,{useContext,useEffect} from 'react';
+import React,{useContext} from 'react';
 import {AppContext} from '../Contexts/AppContext';
 import {v4 as uuidv4} from 'uuid';
 import WindImage from '../Assets/images/wind-solid.svg';

@@ -16,7 +16,7 @@ const City=()=>{
         cancel,
         showHourly,
         showDaily,
-        showForecast,
+        showForecast
     }=useContext(AppContext)
 
 

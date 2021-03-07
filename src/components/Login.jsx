@@ -3,7 +3,6 @@ import {Form, Button } from 'react-bootstrap';
 import { AuthContext } from '../Contexts/AuthContext';
 import Fade from 'react-reveal';
 import {Link , useHistory} from 'react-router-dom';
-import {message} from "antd";
 
 const Login = () =>{
 
